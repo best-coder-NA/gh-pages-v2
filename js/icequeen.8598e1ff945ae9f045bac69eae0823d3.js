@@ -46,11 +46,19 @@ async function main() {
   const SPGL_PNG_ADDRESS = "0x621207093D2e65Bf3aC55dD8Bf0351B980A63815";
   const SPGL_ETH_ADDRESS = "0x586554828eE99811A8ef75029351179949762c26";
   const SPGL_LINK_ADDRESS = "0x00933c16e06b1d15958317C2793BC54394Ae356C";
-  const SNOB_ADDRESS = "0xc38f41a296a4493ff429f1238e030924a1542e50";
+  const SNOB_ADDRESS = "0xC38f41A296A4493Ff429F1238e030924A1542e50";
+
+  const TOKEN_NAMES = {
+    "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7": "AVAX",
+    "0x60781C2586D68229fde47564546784ab3fACA982": "PNG",
+    "0xC38f41A296A4493Ff429F1238e030924A1542e50": "SNOB",
+    "0x39cf1BD5f15fb22eC3D9Ff86b0727aFc203427cc": "SUSHI",
+    "0xf20d962a6c8f70c731bd838a3a388D7d48fA6e15": "ETH",
+  }
 
   //LP URLs
   const SUSHI_AVAX_POOL_URL = "https://app.pangolin.exchange/#/add/AVAX/0x39cf1BD5f15fb22eC3D9Ff86b0727aFc203427cc";
-  const SNOB_AVAX_POOL_URL = "https://app.pangolin.exchange/#/add/AVAX/0xc38f41a296a4493ff429f1238e030924a1542e50";
+  const SNOB_AVAX_POOL_URL = "https://app.pangolin.exchange/#/add/AVAX/0xC38f41A296A4493Ff429F1238e030924A1542e50";
   const PNG_AVAX_POOL_URL = "https://app.pangolin.exchange/#/add/AVAX/0x60781c2586d68229fde47564546784ab3faca982";
   const ETH_AVAX_POOL_URL = "https://app.pangolin.exchange/#/add/AVAX/0xf20d962a6c8f70c731bd838a3a388d7d48fa6e15";
   const LINK_AVAX_POOL_URL = "https://app.pangolin.exchange/#/add/avax/0xb3fe5374f67d7a22886a0ee082b2e2f9d2651651";
@@ -58,7 +66,7 @@ async function main() {
   // TVL URLS
   const SUSHI_AVAX_TVL = "https://info.pangolin.exchange/#/account/0x14ec55f8B4642111A5aF4f5ddc56B7bE867eB6cC"
   const SNOB_AVAX_TVL = "https://info.pangolin.exchange/#/account/0xB12531a2d758c7a8BF09f44FC88E646E1BF9D375"
-  const PNG_AVAX_TVL = "https://info.pangolin.exchange/#/account/0x1eC206a9dD85625E1940cD2B0c8e14a894D2e9aC"
+  const PNG_AVAX_TVL = "https://info.pangolin.exchange/#/account/0x6A803904b9eA0Fc982fBB077c7243c244Ae05a2d"
   const ETH_AVAX_TVL = "https://info.pangolin.exchange/#/account/0x953853590b805A0E885A75A3C786D2aFfcEEA3Cf"
   const LINK_AVAX_TVL = "https://info.pangolin.exchange/#/account/0x974Ef0bDA58C81F3094e124f530eF34fe70dc103"
 
@@ -204,57 +212,41 @@ async function main() {
   const snowballsPerBlock = snowballMultiplier * blockRate
   const blockNumber = await App.provider.getBlockNumber()
   const prices = await getAvaxPrices();
-  const snobPrice = prices['0xc38f41a296a4493ff429f1238e030924a1542e50'].usd
-  const marketCapDispay = `$${new Intl.NumberFormat('en-US').format(snobTotalSupply / 1e18 * snobPrice)}`
+  const snobPrice = prices['0xC38f41A296A4493Ff429F1238e030924A1542e50'] ? prices['0xC38f41A296A4493Ff429F1238e030924A1542e50'].usd : 0;
+  const marketCapDisplay = `$${new Intl.NumberFormat('en-US').format(snobTotalSupply / 1e18 * snobPrice)}`
 
-   //total supply
-	_print(`<b>Snowball (SNOB)</b>: <a href='https://www.coingecko.com/en/coins/snowball-token' target='_blank'>$${snobPrice.toFixed(3)}</a>   <b>MarketCap</b>: ${marketCapDispay}`)
+    $('#value-market').append(`$${snobPrice.toFixed(3)}`)
+    $('#value-marketcap').append(`${marketCapDisplay}`)
+    $('#snob-supply').append(`${(snobTotalSupply / 1e18).toLocaleString()}`)
+    $('#snob-supply-max').append(`18,000,000`)
+    $('#snob-per-block').append(`${snowballsPerBlock / 1e18}`)
+    $('#snob-block-pday').append(`${(snowballsPerBlock / 1e18 * 15000).toLocaleString()}`)
 
-	const cs = `
-		Circulating Supply: ${(snobTotalSupply / 1e18).toFixed()}       Max: 18000000
-		    SNOB Per Block:      ${snowballsPerBlock / 1e18}   Per Day: ${snowballsPerBlock / 1e18 * 15000}
-		Est Blocks Per Day:   15000
-		`
-	_print(cs)
-
-   // balance
- 	document.getElementById('wallet-address').addEventListener('click', ()=>{
+    document.getElementById('wallet-copy').addEventListener('click', ()=>{
     navigator.clipboard.writeText(`${App.YOUR_ADDRESS}`).then(function() {
-        console.log('Async: Copying to clipboard was successful!');
+        console.log('Snowball Platform: Copying to clipboard was successful!');
       }, function(err) {
-        console.error('Async: Could not copy text: ', err);
+        console.error('Snowball Platform: Could not copy text: ', err);
     });
 	});
+    let walletAddres = `${App.YOUR_ADDRESS}`;
+   $('#wallet-address').html(`${walletAddres}`);
 
-   $('#wallet-address').html(`${App.YOUR_ADDRESS}`);
-   /* _print(`<b>Wallet ❄️</b> Address: ${App.YOUR_ADDRESS}`); */
 
    if (currentSNOBTokens / 1e18 > 0 || claimableSnowballs > 0) {
       $('#account-info').show();
-      $('#value').append(`${((currentSNOBTokens / 1e18 + claimableSnowballs) * snobPrice).toFixed(2)}`);
-      $('#wallet-pending').append(`${(currentSNOBTokens / 1e18 + claimableSnowballs).toFixed(4)}`);
+      $('#snob-info').show();
+      $('#value-snob').append(`${(currentSNOBTokens / 1e18 + claimableSnowballs).toFixed(4)}`);
+      $('#value-usd').append(`${((currentSNOBTokens / 1e18 + claimableSnowballs) * snobPrice).toFixed(2)}`);
       $('#wallet').append(`${(currentSNOBTokens / 1e18).toFixed(4)}`);
-      $('#pending').append(`${claimableSnowballs.toFixed(4)}`);
+      if (claimableSnowballs > 0) {
+        $('#pending').append(`<ion-icon name="time-outline"></ion-icon> Pending: ${(claimableSnowballs).toFixed(4)}`);
+      }else{
+        $('#pending').append(`<ion-icon name="checkmark-circle" class="text-success"></ion-icon> No pending rewards`);
+      }
+
    }
-   // const cs = `
-   //  Circulating Supply: ${(snobTotalSupply / 1e18).toFixed()}       Max: 18000000
-   //      SNOB Per Block:      ${snowballsPerBlock / 1e18}   Per Day: ${snowballsPerBlock / 1e18 * 15000}
-   //  Est Blocks Per Day:   15000
-   // `
-   // _print(cs)
 
-   // // balance
-   // _print(`<b>Wallet ❄️</b> Address: ${App.YOUR_ADDRESS}`);
-
-   // if (currentSNOBTokens / 1e18 > 0 || claimableSnowballs > 0) {
-   //   _print(``);
-   //   _print(`    Wallet:  ${currentSNOBTokens / 1e18}`)
-   //   _print(`   Pending:  ${claimableSnowballs}`)
-   //   _print(`     Total:  ${currentSNOBTokens / 1e18 + claimableSnowballs}`)
-   //   _print(``);
-   //   _print(`     Value: $<b>${((currentSNOBTokens / 1e18 + claimableSnowballs) * snobPrice).toFixed(2)}</b>`)
-   //   _print(``);
-   // }
    //Balances
 
   const currentSUSHIAVAXTokens = await SUSHI_AVAX_TOKEN.balanceOf(App.YOUR_ADDRESS)
@@ -377,9 +369,132 @@ async function main() {
 	const link_apr = apr_array[3]
 	const usdt_apr = apr_array[4]
 
+  
+  // PGL & LP values
+  //SNOWGLOBE_SUSHI_ADDR
+  const snowglobeContract_1 = new ethers.Contract(SNOWGLOBE_SUSHI_ADDR, SNOWGLOBE_ABI, signer);
+  let totalPoolPGL_1 = await snowglobeContract_1.balance();
+  let poolShareDisplay_1 = null;
+  let stakeDisplay_1 = null;
+  const userSPGL_1 = stakedPool1.amount / 1e18;
+  try {
+    if (userSPGL_1 > 0) {
+      let totalSPGL_1 = await snowglobeContract_1.totalSupply();
+      let ownedPGL_1 = userSPGL_1 * (totalPoolPGL_1 / 1e18) / (totalSPGL_1 / 1e18);
+      // SUSHI_AVAX_ADDR
+      const pglContract_1 = new ethers.Contract(SUSHI_AVAX_ADDR, PGL_ABI, signer);
+      let totalSupplyPGL_1 = await pglContract_1.totalSupply();
+      totalSupplyPGL_1 = totalSupplyPGL_1 / 1e18;
+      const reserves_1 = await pglContract_1.getReserves();
+      const r0_1 = reserves_1._reserve0 / 1e18
+      const r1_1 = reserves_1._reserve1 / 1e18
+      let reserve0Owned_1 = ownedPGL_1 * (r0_1) / (totalSupplyPGL_1);
+      let reserve1Owned_1 = ownedPGL_1 * (r1_1) / (totalSupplyPGL_1);
+      const token0Address_1 = await pglContract_1.token0();
+      const token1Address_1 = await pglContract_1.token1();
+      const t0Price_1 = prices[token0Address_1] ? prices[token0Address_1].usd : 0
+      const t1Price_1 = prices[token1Address_1] ? prices[token1Address_1].usd : 0
+      const token0ValueUSDT_1 = reserve0Owned_1 * t0Price_1;
+      const token1ValueUSDT_1 = reserve1Owned_1 * t1Price_1;
+      const value_1 = token0ValueUSDT_1 + (token1ValueUSDT_1);
+      poolShareDisplay_1 = `Your pool share is <b>${userSPGL_1.toFixed(3)}</b> sPGL (<b>${ownedPGL_1.toFixed(3)}</b> PGL) - <b>${userPool1Percent.toFixed(6)}%</b>`
+      stakeDisplay_1 = `Your LP value is <b>${reserve0Owned_1.toFixed(3)}</b> ${TOKEN_NAMES[token0Address_1]} / <b>${reserve1Owned_1.toFixed(3)}</b> ${TOKEN_NAMES[token1Address_1]} ($<b>${value_1.toFixed(2)}</b>)***</b>`
+    }
+  } catch { console.log('error calculating PGL value')}
+
+  let poolShareDisplay_2 = null;
+  let stakeDisplay_2 = null;
+  const userPGL_2 = stakedPool2.amount / 1e18;
+  try {
+  if (userPGL_2 > 0) {
+      let totalSPGL_2 = 0;
+      let ownedPGL_2 = userPGL_2;
+      // SNOB_AVAX_TOKEN
+      const pglContract_2 = new ethers.Contract(SNOB_AVAX_ADDR, PGL_ABI, signer)
+      let totalSupplyPGL_2 = await pglContract_2.totalSupply();
+      totalSupplyPGL_2 = totalSupplyPGL_2 / 1e18;
+      const reserves_2 = await pglContract_2.getReserves();
+      const r0_2 = reserves_2._reserve0 / 1e18
+      const r1_2 = reserves_2._reserve1 / 1e18
+      let reserve0Owned_2 = ownedPGL_2 * (r0_2) / (totalSupplyPGL_2);
+      let reserve1Owned_2 = ownedPGL_2 * (r1_2) / (totalSupplyPGL_2);
+      const token0Address_2 = await pglContract_2.token0();
+      const token1Address_2 = await pglContract_2.token1();
+      const t0Price_2 = prices[token0Address_2] ? prices[token0Address_2].usd : 0
+      const t1Price_2 = prices[token1Address_2] ? prices[token1Address_2].usd : 0
+      const token0ValueUSDT_2 = reserve0Owned_2 * t0Price_2;
+      const token1ValueUSDT_2 = reserve1Owned_2 * t1Price_2;
+      const value_2 = token0ValueUSDT_2 + (token1ValueUSDT_2);
+      poolShareDisplay_2 = `Your pool share is <b>${ownedPGL_2.toFixed(3)}</b> PGL - <b>${userPool2Percent.toFixed(6)}%</b></b>`
+      stakeDisplay_2 = `Your LP value is <b>${reserve0Owned_2.toFixed(3)}</b> ${TOKEN_NAMES[token0Address_2]} / <b>${reserve1Owned_2.toFixed(3)}</b> ${TOKEN_NAMES[token1Address_2]} ($<b>${value_2.toFixed(2)}</b>)***</b>`
+    }
+  } catch { console.log('error calculating PGL value')}
+
+  //SNOWGLOBE_PNG_ADDR
+  const snowglobeContract_3 = new ethers.Contract(SNOWGLOBE_PNG_ADDR, SNOWGLOBE_ABI, signer);
+  let totalPoolPGL_3 = await snowglobeContract_3.balance();
+  let poolShareDisplay_3 = null;
+  let stakeDisplay_3 = null;
+  const userSPGL_3 = stakedPool3.amount / 1e18;
+  try {
+    if (userSPGL_3 > 0) {
+      let totalSPGL_3 = await snowglobeContract_3.totalSupply();
+      let ownedPGL_3 = userSPGL_3 * (totalPoolPGL_3 / 1e18) / (totalSPGL_3 / 1e18);
+      // PNG_AVAX_ADDR
+      const pglContract_3 = new ethers.Contract(PNG_AVAX_ADDR, PGL_ABI, signer);
+      let totalSupplyPGL_3 = await pglContract_3.totalSupply();
+      totalSupplyPGL_3 = totalSupplyPGL_3 / 1e18;
+      const reserves_3 = await pglContract_3.getReserves();
+      const r0_3 = reserves_3._reserve0 / 1e18
+      const r1_3 = reserves_3._reserve1 / 1e18
+      let reserve0Owned_3 = ownedPGL_3 * (r0_3) / (totalSupplyPGL_3);
+      let reserve1Owned_3 = ownedPGL_3 * (r1_3) / (totalSupplyPGL_3);
+      const token0Address_3 = await pglContract_3.token0();
+      const token1Address_3 = await pglContract_3.token1();
+      const t0Price_3 = prices[token0Address_3] ? prices[token0Address_3].usd : 0
+      const t1Price_3 = prices[token1Address_3] ? prices[token1Address_3].usd : 0
+      const token0ValueUSDT_3 = reserve0Owned_3 * t0Price_3;
+      const token1ValueUSDT_3 = reserve1Owned_3 * t1Price_3;
+      const value_3 = token0ValueUSDT_3 + (token1ValueUSDT_3);
+      poolShareDisplay_3 = `Your pool share is <b>${userSPGL_3.toFixed(3)}</b> sPGL (<b>${ownedPGL_3.toFixed(3)}</b> PGL) - <b>${userPool3Percent.toFixed(6)}%</b>`
+      stakeDisplay_3 = `Your LP Value is <b>${reserve0Owned_3.toFixed(3)}</b> ${TOKEN_NAMES[token0Address_3]} / <b>${reserve1Owned_3.toFixed(3)}</b> ${TOKEN_NAMES[token1Address_3]} ($<b>${value_3.toFixed(2)}</b>)***</b>`
+    }
+  } catch { console.log('error calculating PGL value')}
+
+  //SNOWGLOBE_ETH_ADDR
+  const snowglobeContract_4 = new ethers.Contract(SNOWGLOBE_ETH_ADDR, SNOWGLOBE_ABI, signer);
+  let totalPoolPGL_4 = await snowglobeContract_4.balance();
+  let poolShareDisplay_4 = null;
+  let stakeDisplay_4 = null;
+  const userSPGL_4 = stakedPool4.amount / 1e18;
+  try {
+    if (userSPGL_4 > 0) {
+      let totalSPGL_4 = await snowglobeContract_4.totalSupply();
+      let ownedPGL_4 = userSPGL_4 * (totalPoolPGL_4 / 1e18) / (totalSPGL_4 / 1e18);
+      // ETH_AVAX_ADDR
+      const pglContract_4 = new ethers.Contract(ETH_AVAX_ADDR, PGL_ABI, signer);
+      let totalSupplyPGL_4 = await pglContract_4.totalSupply();
+      totalSupplyPGL_4 = totalSupplyPGL_4 / 1e18;
+      const reserves_4 = await pglContract_4.getReserves();
+      const r0_4 = reserves_4._reserve0 / 1e18
+      const r1_4 = reserves_4._reserve1 / 1e18
+      let reserve0Owned_4 = ownedPGL_4 * (r0_4) / (totalSupplyPGL_4);
+      let reserve1Owned_4 = ownedPGL_4 * (r1_4) / (totalSupplyPGL_4);
+      const token0Address_4 = await pglContract_4.token0();
+      const token1Address_4 = await pglContract_4.token1();
+      const t0Price_4 = prices[token0Address_4] ? prices[token0Address_4].usd : 0
+      const t1Price_4 = prices[token1Address_4] ? prices[token1Address_4].usd : 0
+      const token0ValueUSDT_4 = reserve0Owned_4 * t0Price_4;
+      const token1ValueUSDT_4 = reserve1Owned_4 * t1Price_4;
+      const value_4 = token0ValueUSDT_4 + (token1ValueUSDT_4);
+      poolShareDisplay_4 = `Your pool share is <b>${userSPGL_4.toFixed(3)}</b> sPGL (<b>${ownedPGL_4.toFixed(3)}</b> PGL) - <b>${userPool4Percent.toFixed(6)}%</b>`
+      stakeDisplay_4 = `Your LP Value is <b>${reserve0Owned_4.toFixed(3)}</b> ${TOKEN_NAMES[token0Address_4]} / <b>${reserve1Owned_4.toFixed(3)}</b> ${TOKEN_NAMES[token1Address_4]} ($<b>${value_4.toFixed(2)}</b>)***</b>`
+    }
+  } catch { console.log('error calculating PGL value')}
+
 
   _print(`<b style="font-size: 20px;"">IceQueen 👸 - Governance</b>`);
-  _print(`<div style="font-size:smaller;padding: 4px 0 0 20px">*Estimates based on 15,000 blocks per day<br/>**Combined APR includes the APR earned from Snowglobe</div>`)
+  _print(`<div style="font-size:smaller;padding: 4px 0 0 20px">*Estimates based on 15,000 blocks per day<br/>**Combined APR includes the APR earned from Snowglobe<br/>***Estimated LP value based on current token prices</div>`)
 
   function pool(options) {
     _print(``)
@@ -396,20 +511,30 @@ async function main() {
 				_print(`Combined APR**: Day ${combinedAPR.toFixed(2)}% Week ${(combinedAPR * 7).toFixed(2)}% Year ${(combinedAPR * 365).toFixed(2)}%`)
 			}
 		}
-    _print(`Allocation: <b>${ (options.pool_weight * 100)}%</b> SNOB Per Block: <b>${snowballsPerBlock * options.pool_weight / 1e18}</b>`)
-    _print(`Pool Size: <b>${ (options.total_staked / 1e18).toFixed(2)}</b>`)
+    _print(`Allocation: <b>${ (options.pool_weight * 100)}%</b> SNOB Per Day: <b>${snowballsPerBlock * options.pool_weight / 1e18 * 15000}</b>`)
+    if (options.total_staked) {
+      _print(`Pool Size: <b>${ (options.total_staked / 1e18).toLocaleString()}</b> sPGL (<b>${ (options.total_pgl / 1e18).toLocaleString()}</b> PGL)`)
+    } else {
+      _print(`Pool Size: <b>${ (options.total_pgl / 1e18).toLocaleString()}</b> PGL`)
+    }
     if ( options.user_pool_percent > 0 ) {
-      _print(`Your pool %: <b>${options.user_pool_percent.toFixed(10)}%</b> SNOB Per Block: <b>${(snowballsPerBlock * options.pool_weight * options.user_pool_percent / 100 / 1e18).toFixed(10)}</b>`)
+      if (options.pool_share_display) {
+        _print(options.pool_share_display)
+      }
+      if (options.stake_display) {
+        _print(options.stake_display)
+      }
+      //_print(`Your pool %: <b>${options.user_pool_percent.toFixed(10)}%</b> SNOB Per Block: <b>${(snowballsPerBlock * options.pool_weight * options.user_pool_percent / 100 / 1e18).toFixed(10)}</b>`)
       _print(`You are earning <b>${(snowballsPerBlock * options.pool_weight * options.user_pool_percent / 100 / 1e18 * 15000).toFixed(2)}</b> SNOB per day ($<b>${(snowballsPerBlock * options.pool_weight * options.user_pool_percent / 100 / 1e18 * 15000 * snobPrice).toFixed(2)})</b>`)
     }
     if ( options.pending_tokens / 1e18 > 0 ) {
-      _print(`Pending: <b>${(options.pending_tokens / 1e18).toFixed(6)}</b>`)
+      _print(`Pending: <b>${(options.pending_tokens / 1e18).toFixed(6)}</b> SNOB`)
     }
     if ( options.display_amount > 0 ) {
-      _print(`Available Stake: <b>${(options.display_amount).toFixed(6)}</b>`)
+      _print(`Available to Stake: <b>${(options.display_amount).toFixed(6)}</b> sPGL`)
     }
     if ( options.staked_pool.amount / 1e18 > 0 ) {
-      _print(`Available Unstake: <b>${(options.staked_pool.amount / 1e18).toFixed(6)}</b>`)
+      _print(`Available to Unstake: <b>${(options.staked_pool.amount / 1e18).toFixed(6)}</b> sPGL`)
     }
     let has_options = false
     if ( options.display_amount > 0 ) {
@@ -432,7 +557,7 @@ async function main() {
   }
   pool({
     pool_nickname: '(Pool 4)',
-    pool_name: '💠 ETH-AVAX Snowglobe',
+    pool_name: '💠 ETH-AVAX sPGL',
     url: null,
     tvl: ETH_AVAX_TVL,
     pool_weight: pool4weight,
@@ -447,7 +572,10 @@ async function main() {
     claim: claimPool4,
     icequeen_apr: pool4APR,
     snowglobe_apr: eth_apr.dailyAPR,
-    tvl_display: pool4tvlDisplay
+    tvl_display: pool4tvlDisplay,
+    total_pgl: totalPoolPGL_4,
+    pool_share_display: poolShareDisplay_4,
+    stake_display: stakeDisplay_4
   })
 
   pool({
@@ -467,7 +595,10 @@ async function main() {
     claim: claimPool3,
     icequeen_apr: pool3APR,
     snowglobe_apr: png_apr.dailyAPR,
-    tvl_display: pool3tvlDisplay
+    tvl_display: pool3tvlDisplay,
+    total_pgl: totalPoolPGL_3,
+    pool_share_display: poolShareDisplay_3,
+    stake_display: stakeDisplay_3
   })
 
   pool({
@@ -476,7 +607,7 @@ async function main() {
     url: SNOB_AVAX_POOL_URL,
     tvl: SNOB_AVAX_TVL,
     pool_weight: pool2weight,
-    total_staked: totalStakedSNOBAVAX,
+    total_staked: null,
     user_pool_percent: userPool2Percent,
     staked_pool: stakedPool2,
     pending_tokens: pendingSNOBTokensPool2,
@@ -487,7 +618,10 @@ async function main() {
     claim: claimPool2,
     icequeen_apr: pool2APR,
     snowglobe_apr: null,
-    tvl_display: pool2tvlDisplay
+    tvl_display: pool2tvlDisplay,
+    total_pgl: totalStakedSNOBAVAX,
+    pool_share_display: poolShareDisplay_2,
+    stake_display: stakeDisplay_2
   })
 
   pool({
@@ -507,7 +641,10 @@ async function main() {
     claim: claimPool1,
     icequeen_apr: pool1APR,
     snowglobe_apr: sushi_apr.dailyAPR,
-    tvl_display: pool1tvlDisplay
+    tvl_display: pool1tvlDisplay,
+    total_pgl: totalPoolPGL_1,
+    pool_share_display: poolShareDisplay_1,
+    stake_display: stakeDisplay_1
   })
 
   hideLoading();
