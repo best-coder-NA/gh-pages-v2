@@ -27,7 +27,7 @@ async function init_ethers() {
     App.provider = new ethers.providers.Web3Provider(window.ethereum)
     // Check provider connected to the right network
     const network = await App.provider.getNetwork()
-    if (network.chainId != 43114) { // 43114 = chain ID for avalanche mainnet
+    if (network.chainId != 43114 && network.chainId != 43113) { // 43114, 43113 = chain ID for avalanche mainnet & FUJI testnet
       _print("You're on the wrong network!")
       _print_href("Please refer to this tutorial.", "https://pangolin.exchange/tutorials/getting-started")
       _print("")
@@ -38,7 +38,7 @@ async function init_ethers() {
     App.provider = new ethers.providers.Web3Provider(window.web3.currentProvider)
     // Check provider connected to the right network
     const network = await App.provider.getNetwork()
-    if (network.chainId != 43114) { // 43114 = chain ID for avalanche mainnet
+    if (network.chainId != 43114 && network.chainId != 43113) { // 43114, 43113 = chain ID for avalanche mainnet & FUJI testnet
       _print("You're on the wrong network!")
       _print_href("Please refer to this tutorial.", "https://pangolin.exchange/tutorials/getting-started")
       _print("")
@@ -1071,7 +1071,7 @@ async function getStoredToken(app, tokenAddress, stakingAddress, type) {
       }
       const [minter] = await app.ethcallProvider.all([crv.minter()]);
       return await getCurveToken(app, crv, tokenAddress, stakingAddress, minter);
-    case "stableswap":
+    case "stablevault":
       const stable = new ethcall.Contract(tokenAddress, STABLESWAP_ABI);
       return await getStableswapToken(app, stable, tokenAddress, stakingAddress);
   }
@@ -1160,7 +1160,7 @@ async function getToken(app, tokenAddress, stakingAddress) {
   try {
     const stable = new ethcall.Contract(tokenAddress, STABLESWAP_ABI);
     const _coin0 = await app.ethcallProvider.all([stable.coins(0)]);
-    window.localStorage.setItem(tokenAddress, "stableswap");
+    window.localStorage.setItem(tokenAddress, "stablevault");
     return await getStableswapToken(app, stable, tokenAddress, stakingAddress);
   }
   catch (err) {
