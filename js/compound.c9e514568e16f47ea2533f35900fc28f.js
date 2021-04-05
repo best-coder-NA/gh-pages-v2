@@ -698,27 +698,27 @@ async function main() {
       $('#snob-pools').append(poolPrint);
     }
   }
-  // layout_pool({
-  //   logo_token1 : 'https://x-api.snowballfinance.info/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png',
-  //   logo_token2 : 'https://raw.githubusercontent.com/ava-labs/bridge-tokens/main/avalanche-tokens/0x408D4cD0ADb7ceBd1F1A1C33A0Ba2098E1295bAB/logo.png',
-  //   url: WBTC_AVAX_POOL_URL,
-  //   pool_name: 'AVAX-WBTC Pangolin LP - New! 🌟',
-  //   tvl: WBTC_AVAX_TVL,
-  //   apr: wbtc_apr,
-  //   apy: wbtc_annual_apy,
-  //   total_deposited: totalDepositedWBTCAVAX,
-  //   user_pool_percent: userWbtcPoolPercent,
-  //   current_tokens: currentWBTCAVAXTokens,
-  //   display_amount: spglWbtcDisplayAmt,
-  //   approve: 'approveWBTC',
-  //   stake: 'stakeWBTC',
-  //   withdraw: 'withdrawWBTC',
-  //   tvl_display: wbtc_tvl_display,
-  //   pool_share_display: poolShareDisplay_wbtc,
-  //   stake_display: stakeDisplay_wbtc,
-  //   total_pgl: totalPoolPGL_wbtc,
-  //   withdraw_display: withdrawDisplay_wbtc
-  // })
+  layout_pool({
+    logo_token1 : 'https://x-api.snowballfinance.info/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png',
+    logo_token2 : 'https://raw.githubusercontent.com/ava-labs/bridge-tokens/main/avalanche-tokens/0x408D4cD0ADb7ceBd1F1A1C33A0Ba2098E1295bAB/logo.png',
+    url: WBTC_AVAX_POOL_URL,
+    pool_name: 'AVAX-WBTC Pangolin LP - New! 🌟',
+    tvl: WBTC_AVAX_TVL,
+    apr: wbtc_apr,
+    apy: wbtc_annual_apy,
+    total_deposited: totalDepositedWBTCAVAX,
+    user_pool_percent: userWbtcPoolPercent,
+    current_tokens: currentWBTCAVAXTokens,
+    display_amount: spglWbtcDisplayAmt,
+    approve: 'approveWBTC',
+    stake: 'stakeWBTC',
+    withdraw: 'withdrawWBTC',
+    tvl_display: wbtc_tvl_display,
+    pool_share_display: poolShareDisplay_wbtc,
+    stake_display: stakeDisplay_wbtc,
+    total_pgl: totalPoolPGL_wbtc,
+    withdraw_display: withdrawDisplay_wbtc
+  })
   layout_pool({
     logo_token1 : 'https://x-api.snowballfinance.info/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png',
     logo_token2 : 'https://x-api.snowballfinance.info/assets/avalanche-tokens/0xde3a24028580884448a5397872046a019649b084/logo.png',
