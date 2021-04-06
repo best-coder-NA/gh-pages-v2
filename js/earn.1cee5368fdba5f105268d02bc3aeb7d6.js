@@ -787,6 +787,10 @@ async function main() {
                         <h6 class="pl-10 m-0">${options.pool_name}</h6>
                     </div>
                 </div>
+                <div class="col-sm-12 col-md-1 align-items-center text-center snob-tvl pb-10 pb-md-0">
+                    <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
+                    <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
+                </div>
                 <div class="col-sm-12 col-md-2 d-flex align-items-center pb-10 pb-md-0 mx-auto">
                     <div class="form-inline w-50 mx-auto">
                         <div class="form-group m-md-0">
@@ -867,6 +871,10 @@ async function main() {
                         <img class="rounded-circle" width="48" src="${options.logo_token2}" alt="${options.pool_name}">
                         <h6 class="pl-10 m-0">${options.pool_name}</h6>
                     </div>
+                </div>
+                <div class="col-sm-12 col-md-1 align-items-center text-center snob-tvl pb-10 pb-md-0">
+                    <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
+                    <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
                 </div>
                 <div class="col-sm-12 col-md-2 d-flex align-items-center pb-10 pb-md-0 mx-auto">
                     <div class="form-inline w-50 mx-auto">
@@ -1104,6 +1112,10 @@ async function main() {
                         <h6 class="pl-10 m-0">${options.pool_name}</h6>
                     </div>
                 </div>
+                <div class="col-sm-12 col-md-1 align-items-center text-center snob-tvl pb-10 pb-md-0">
+                    <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
+                    <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
+                </div>
                 <div class="col-sm-12 col-md-2 d-flex align-items-center pb-10 pb-md-0 mx-auto">
                     <div class="form-inline w-50 mx-auto">
                         <div class="form-group m-md-0">
@@ -1185,6 +1197,10 @@ async function main() {
                       <img class="rounded-circle" width="48" src="${options.logo_token3}" alt="${options.pool_name}">
                       <h6 class="pl-10 m-0">${options.pool_name}</h6>
                   </div>
+              </div>
+              <div class="col-sm-12 col-md-1 align-items-center text-center snob-tvl pb-10 pb-md-0">
+                  <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
+                  <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
               </div>
               <div class="col-sm-12 col-md-2 d-flex align-items-center pb-10 pb-md-0 mx-auto">
                   <div class="form-inline w-50 mx-auto">
@@ -1429,6 +1445,10 @@ async function main() {
                         <h6 class="pl-10 m-0">${options.pool_name}</h6>
                     </div>
                 </div>
+                <div class="col-sm-12 col-md-1 align-items-center text-center snob-tvl pb-10 pb-md-0">
+                    <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
+                    <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
+                </div>
                 <div class="col-sm-12 col-md-2 d-flex align-items-center pb-10 pb-md-0 mx-auto">
                     <div class="form-inline w-50 mx-auto">
                         <div class="form-group m-md-0">
@@ -1509,6 +1529,10 @@ async function main() {
                         <img class="rounded-circle" width="48" src="${options.logo_token2}" alt="${options.pool_name}">
                         <h6 class="pl-10 m-0">${options.pool_name}</h6>
                     </div>
+                </div>
+                <div class="col-sm-12 col-md-1 align-items-center text-center snob-tvl pb-10 pb-md-0">
+                    <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
+                    <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
                 </div>
                 <div class="col-sm-12 col-md-2 d-flex align-items-center pb-10 pb-md-0 mx-auto">
                     <div class="form-inline w-50 mx-auto">
