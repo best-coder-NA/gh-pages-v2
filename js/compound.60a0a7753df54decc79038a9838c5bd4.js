@@ -577,15 +577,15 @@ async function main() {
   const layout_pool = function(options) {
     //_print(``)
     //_print(`<a href='${options.url}' target='_blank'>${options.pool_name}</a>`)
-    if ( options.tvl_display ) {
-      //_print(`TVL: <a href='${options.tvl}' target='_blank'>${options.tvl_display}</a>`)
-      var tvl = `<div class="col-sm-12 col-md-12 align-items-center text-center mt-5 mb-5">
-      <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
-      <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
-      </div>`;
-    }else{
-      var tvl = '';
-    }
+    // if ( options.tvl_display ) {
+    //   //_print(`TVL: <a href='${options.tvl}' target='_blank'>${options.tvl_display}</a>`)
+    //   var tvl = `<div class="col-sm-12 col-md-12 align-items-center text-center mt-5 mb-5">
+    //   <p class="m-0 font-size-12"><ion-icon name="lock-closed-outline"></ion-icon> Total Value Locked</p>
+    //   <span class="badge font-size-12 px-5 px-sm-10 mx-5">${options.tvl_display}</span>
+    //   </div>`;
+    // }else{
+    //   var tvl = '';
+    // }
     //_print(`APR - Day: <b>${options.apr.dailyAPR.toFixed(2)}</b>% Week: <b>${options.apr.weeklyAPR.toFixed(2)}</b>% Year: <b>${options.apr.yearlyAPR.toFixed(2)}</b>%`);
     //_print(`APY (compounding): <b>${options.apy.toFixed(2)}</b>%`);
     var apy =  `<div class="col-sm-12 col-md-12 align-items-center text-center mt-5 mb-5">
@@ -670,7 +670,6 @@ async function main() {
                       <a href="${options.url}" target="_blank"><h6 class="pl-10 m-0">${options.pool_name}</h6></a>
                   </div>
               </div>
-              ${tvl}
               ${apy}
               <div class="col-sm-12 col-md-12 d-flex align-items-center mx-auto">
                   <div class="form-inline w-50 mx-auto">
@@ -709,7 +708,6 @@ async function main() {
                         <a href="${options.url}" target="_blank"><h6 class="pl-10 m-0">${options.pool_name}</h6></a>
                     </div>
                 </div>
-                ${tvl}
                 ${apy}
                 <div class="col-sm-12 col-md-12 d-flex align-items-center mx-auto">
                     <div class="form-inline w-50 mx-auto">
