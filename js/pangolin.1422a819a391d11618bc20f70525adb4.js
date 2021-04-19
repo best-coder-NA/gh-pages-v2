@@ -110,10 +110,7 @@ async function main() {
     window.tvl = results[2]
     
     gentop().then(td => { console.log('top done:', td) })
-
-    thispagespools.reverse().forEach(pool => genpool(pool));
-    thispagespools.reverse().forEach(pool => genAPR(pool));
-    hideLoading();
+    genpool(thispagespools.pop())
 
   })
 
