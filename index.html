@@ -1,18 +1,1233 @@
-<!DOCTYPE html> <html lang=en> <head> <meta charset=UTF-8> <!-- Primary Meta Tags --> <title>Snowball</title> <meta name=title content=Snowball> <meta name=description content="❄️ DeFi on Avalanche"> <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> <!-- Open Graph / Facebook --> <meta property=og:type content=website> <meta property=og:url content=https://snowball.network> <meta property=og:title content=Snowball> <meta property=og:description content="❄️ DeFi on Avalanche"> <meta property=og:image content="https://media.discordapp.net/attachments/818991928951439371/821075255544119396/image0.png?width=630&height=630"> <!-- Twitter --> <meta property=twitter:card content=summary> <meta property=twitter:url content=https://snowball.network> <meta property=twitter:title content=Snowball> <meta property=twitter:description content="❄️ DeFi on Avalanche"> <meta name=twitter:image content="https://media.discordapp.net/attachments/818991928951439371/821075255544119396/image0.png?width=630&height=630"> <meta property=twitter:image content="https://media.discordapp.net/attachments/818991928951439371/821075255544119396/image0.png?width=630&height=630"> <link rel=stylesheet href=/css/index.23564832fdcaf859b2f4d6716c7d9b70.css> <link rel=preload href=/js/vendor.407bfa69eb18423c9995b11d1bf846dd.js as=script> <link rel=prefetch href=/js/vendor.407bfa69eb18423c9995b11d1bf846dd.js> <link rel=preload href=/js/app.d34a5a13ef1aa5f52fedfcc195fa5e8e.js as=script> <link rel=prefetch href=/js/app.d34a5a13ef1aa5f52fedfcc195fa5e8e.js> <link rel="shortcut icon" type=image/png href=/android-chrome-512x512.png> <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon-180x180.png> <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png> <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png> <link rel=manifest href=/site.webmanifest> <meta name=msapplication-TileColor content=#da532c> <meta name=theme-color content=#ffffff> <link rel=manifest href=/manifest.json> <link rel=preconnect href=https://fonts.gstatic.com> <link rel=preconnect href=https://fonts.gstatic.com> <link rel=preconnect href=https://fonts.gstatic.com> <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;300;400;500;600;700;800&display=swap" rel=stylesheet> <link href=https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css rel=stylesheet> <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous"> --> <script type=module src=https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js></script> </head> <div id=quick class=modal> <form class=modal-content id=quick-form> <input autocomplete=off id=quick-input class=modal-input> <ul id=quick-dropdown></ul> </form> </div> <script> if (window.localStorage.getItem('snowballDarkmode') == 'true') {
-    document.body.classList.add('dark-mode');
-  }
-  fetch('https://x-api.snowball.network/dex/0xc38f41a296a4493ff429f1238e030924a1542e50/tvl.json').then(function (response) {
-    return response.json();
-  }).then(function (info) {
-    document.getElementById('tvl').innerHTML = '$' + new Intl.NumberFormat('en-US').format(info.locked.toFixed(0));
-    let cents = ' $0.' + info.price.toFixed(2).split('.')[1];
-    document.querySelector('.buy-btn').setAttribute('price', cents);
-  }).catch(function (err) {
-    document.getElementById('tvl').innerHTML = '';
-    console.log('could not get tvl:', err);
-  }); </script> <body> <div class="page-wrapper with-navbar with-transitions"> <nav class=navbar> <div class=container-lg> <a href=/ class="navbar-brand col-md-3"> <div class=logo></div> <span class="font-size-12 text-monospace px-5 px-sm-10 ml-10">v0.2</span> </a> <ul class="hidden-sm-and-down navbar-nav col-md-6 font-size-14 font-weight-bold"> <li class="nav-item mx-auto"> <a href=/stablevault/ class=nav-link>StableVault</a> </li> <li class="nav-item mx-auto"> <a href=/compound/ class=nav-link>Compound</a> </li> <li class="nav-item mx-auto"> <a href=/earn/ class=nav-link>Earn SNOB</a> </li> <li class="nav-item mx-auto"> <a href=/governance/ class=nav-link>Vote</a> </li> <li class="nav-item mx-auto"> <a href=/nft/ class=nav-link>NFT</a> </li> <li class="nav-item mx-auto"> <a href=/faq/ class=nav-link>FAQ</a> </li> </ul> <div class="navbar-content col-md-3"> <a class=ml-20 href=https://www.avalabs.org/ target=_blank><img class=img-fluid height=90px src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/poweredbyavalanche.png></a> <div class="form-inline d-none d-md-flex mx-auto pr-20"> <!-- <a href="#" class="btn btn-primary" role="button">
-                    <ion-icon name="wallet-outline"></ion-icon> Connect Wallet</a> --> <button class="btn btn-action mr-5" type=button onclick=snowballDarkmode() aria-label="Toggle dark mode"> <ion-icon name=moon-outline></ion-icon></button> </div> <div class="dropdown with-arrow hidden-md-and-up ml-auto"> <button class="btn navbar-menu-btn" data-toggle=dropdown type=button id=navbar-dropdown-toggle-btn aria-haspopup=true aria-expanded=false> <span class=text>Menu</span> <ion-icon name=chevron-down-outline></ion-icon> </button> <div class="dropdown-menu dropdown-menu-right" aria-labelledby=navbar-dropdown-toggle-btn> <a href=/ class=dropdown-item>Home</a> <a href=/stablevault/ class=dropdown-item>StableVault</a> <a href=/compound/ class=dropdown-item>Compound</a> <a href=/earn/ class=dropdown-item>Earn SNOB</a> <a href=/governance/ class=dropdown-item>Vote</a> <a href=/nft/ class=dropdown-item>NFT</a> <a href=/faq/ class=dropdown-item>FAQ</a> <div class=dropdown-divider></div> <div class=p-5> <button class="btn btn-action mr-5" type=button onclick=snowballDarkmode() aria-label="Toggle dark mode"> <ion-icon name=moon-outline></ion-icon> </button> Dark Mode </div> </div> </div> </div> </div> </nav> <!-- Content wrapper start --> <div class="content-wrapper d-lg-flex"> <div class=container-lg> <section id=main> <div class="row mx-auto"> <!-- Main start --> <div class=col-lg-7> <div class=content data-aos=fade-up data-aos-duration=3000> <div class="hero-header pt-20"> <h1 class=font-weight-semi-bold> Earn more with Snowball</h1> </div> <div class=pt-20> <p class="font-weight-medium font-size-16 mb-0 mt-10"><img style=vertical-align:text-bottom width=18px src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/S3D.png> StableVault allows anyone to <b><a href=/stablevault/ >buy and sell stablecoins</a></b> with near-zero fees and virtually no slippage.</p> <p class="font-weight-medium font-size-16 mb-0 mt-10">💰 Stablecoin holders get industry-leading returns by <b><a href=/stablevault/ >staking assets in StableVault</a></b>.</p> <p class="font-weight-medium font-size-16 mb-20 mt-10">❄️ Supercharge your yield-farming strategy by using Snowball to <b><a href=/compound/ >compound your rewards</a></b> automatically.</p> </div> <span class="badge badge-pill p-5 w-150 text-center"> <strong>Total Value Locked</strong> </span> <div class="d-md-flex align-items-center total-locked text-extra-letter-spacing text-monospace font-size-12 pt-20 mb-20" target=_blank rel=noopener> <a href=https://x-api.snowball.network/tvl target=_blank><h2 class="tvl text-primary px-5" id=tvl>...</h2></a> <a href="https://app.pangolin.exchange/#/swap?inputCurrency=avax&outputCurrency=0xc38f41a296a4493ff429f1238e030924a1542e50" class="btn btn-primary btn-lg ml-0 ml-md-20 buy-btn" target=_blank role=button>Buy SNOB</a> </div> <!-- <div class="mt-20">
-                                <a href="https://app.pangolin.exchange/#/swap?inputCurrency=0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7&outputCurrency=0xc38f41a296a4493ff429f1238e030924a1542e50" class="btn btn-primary btn-lg snob-tokens" target="_blank" role="button">
-                                    Buy $SNOB
-                                </a>
-                            </div> --> </div> </div> <div class="col-lg-5 d-flex align-items-center justify-content-center"> <div class=content> <br> <div class=launchpad-animation-container> <div class=rocket-container> <img class="animation infinite slow img-fluid" alt=Snowball src=/snowballAnimate.gif> </div> <div class=propellant-particles-container-row> <div class="propellant-particle blue animation infinite fast delay-small"></div> <div class="propellant-particle red large animation infinite"></div> <div class="propellant-particle yellow animation infinite fast delay-very-small"></div> </div> <div class=propellant-particles-container-row> <div class="propellant-particle shadow animation infinite fast delay-small"></div> <div class="propellant-particle shadow animation infinite fast delay-very-small"></div> </div> </div> </div> </div> </div> </section> <section id=tokens> <div class="container-lg text-center"> <h2 class="">Tokens 🥇</h2> <div class="row mx-auto p-0 bg-transparent"> <a href=https://info.pangolin.exchange/#/token/0xc38f41a296a4493ff429f1238e030924a1542e50 target=_blank class="col-sm-6 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xc38f41a296a4493ff429f1238e030924a1542e50/logo.png> <div class=font-weight-bold>Snowball (SNOB)</div> <p class="font-size-12 text-break">0xc38f41a296a4493ff429f1238e030924a1542e50</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xdE1A11C331a0E45B9BA8FeE04D4B51A745f1e4A4/transactions target=_blank class="col-sm-6 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/S3D.png> <div class=font-weight-bold>StableVault (S3D)</div> <p class="font-size-12 text-break">0xdE1A11C331a0E45B9BA8FeE04D4B51A745f1e4A4</p> </div> </div> </a> </div> </div> <div class="container-lg text-center"> <h2 class="">Contracts 📋</h2> <div class="row mx-auto p-0 bg-transparent"> <a href=https://cchain.explorer.avax.network/address/0x6B41E5c07F2d382B921DE5C34ce8E2057d84C042/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/S3D.png> <div class=font-weight-bold>StableVault</div> <p class="font-size-12 text-break w-sm-full">0x6B41E5c07F2d382B921DE5C34ce8E2057d84C042</p> <div class=my-5>Audited by:</div> <img style=border-radius:50% width=50px src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/quantstamp.jpeg> <img style=border-radius:50% width=50px src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/openzeppelin.jpeg> <img style=border-radius:50% width=50px src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/certik.jpeg> <div class=my-5>Audits Financed by:</div> <img width=50px src=https://raw.githubusercontent.com/Snowball-Finance/Assets/main/saddle.svg> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xB12531a2d758c7a8BF09f44FC88E646E1BF9D375/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <div style=font-size:40px>👸</div> <div class=font-weight-bold>IceQueen</div> <p class="font-size-12 text-break w-sm-full">0xB12531a2d758c7a8BF09f44FC88E646E1BF9D375</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xC38f41A296A4493Ff429F1238e030924A1542e50/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xc38f41a296a4493ff429f1238e030924a1542e50/logo.png> <div class=font-weight-bold>Snowball</div> <p class="font-size-12 text-break w-sm-full">0xC38f41A296A4493Ff429F1238e030924A1542e50</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xf7B8D9f8a82a7a6dd448398aFC5c77744Bd6cb85/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <div style=font-size:40px>🤖</div> <div class=font-weight-bold>Controller</div> <p class="font-size-12 text-break w-sm-full">0xf7B8D9f8a82a7a6dd448398aFC5c77744Bd6cb85</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x53b37b9a6631c462d74d65d61e1c056ea9daa637/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-ETH</div> <p class="font-size-12 text-break w-sm-full">0x53b37b9a6631c462d74d65d61e1c056ea9daa637</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x763Aa38c837f61DD8429313933Cc47f24E881430/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-WBTC</div> <p class="font-size-12 text-break w-sm-full">0x763Aa38c837f61DD8429313933Cc47f24E881430</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x392c51Ab0AF3017E3e22713353eCF5B9d6fBDE84/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-LINK</div> <p class="font-size-12 text-break w-sm-full">0x392c51Ab0AF3017E3e22713353eCF5B9d6fBDE84</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x7987aDB3C789f071FeFC1BEb15Ce6DfDfbc75899/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-USDT</div> <p class="font-size-12 text-break w-sm-full">0x7987aDB3C789f071FeFC1BEb15Ce6DfDfbc75899</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x8eDd233546730C51a9d3840e954E5581Eb3fDAB1/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-SUSHI</div> <p class="font-size-12 text-break w-sm-full">0x8eDd233546730C51a9d3840e954E5581Eb3fDAB1</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xcD651AD29835099334d312a9372418Eb2b70c72F/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-DAI</div> <p class="font-size-12 text-break w-sm-full">0xcD651AD29835099334d312a9372418Eb2b70c72F</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x3270b685A4a61252C6f30c1eBca9DbE622984e22/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-AAVE</div> <p class="font-size-12 text-break w-sm-full">0x3270b685A4a61252C6f30c1eBca9DbE622984e22</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x14F98349Af847AB472Eb7f7c705Dc4Bee530713B/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-UNI</div> <p class="font-size-12 text-break w-sm-full">0x14F98349Af847AB472Eb7f7c705Dc4Bee530713B</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x234ed7c95Be12b2A0A43fF602e737225C83c2aa1/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>SnowGlobe PNG-YFI</div> <p class="font-size-12 text-break w-sm-full">0x234ed7c95Be12b2A0A43fF602e737225C83c2aa1</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x586554828eE99811A8ef75029351179949762c26/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>SnowGlobe AVAX-ETH</div> <p class="font-size-12 text-break w-sm-full">0x586554828eE99811A8ef75029351179949762c26</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x621207093D2e65Bf3aC55dD8Bf0351B980A63815/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>SnowGlobe AVAX-PNG</div> <p class="font-size-12 text-break w-sm-full">0x621207093D2e65Bf3aC55dD8Bf0351B980A63815</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x751089F1bf31B13Fa0F0537ae78108088a2253BF/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>SnowGlobe AVAX-SUSHI</div> <p class="font-size-12 text-break w-sm-full">0x751089F1bf31B13Fa0F0537ae78108088a2253BF</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x00933c16e06b1d15958317C2793BC54394Ae356C/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>SnowGlobe AVAX-LINK</div> <p class="font-size-12 text-break w-sm-full">0x00933c16e06b1d15958317C2793BC54394Ae356C</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x3fcFBCB4b368222fCB4d9c314eCA597489FE8605/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>SnowGlobe AVAX-USDT</div> <p class="font-size-12 text-break w-sm-full">0x3fcFBCB4b368222fCB4d9c314eCA597489FE8605</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x39BE35904f52E83137881C0AC71501Edf0180181/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>SnowGlobe AVAX-WBTC</div> <p class="font-size-12 text-break w-sm-full">0x39BE35904f52E83137881C0AC71501Edf0180181</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xde3bE8a846e4311447462482E91e4b97115222e6/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-ETH</div> <p class="font-size-12 text-break w-sm-full">0xde3bE8a846e4311447462482E91e4b97115222e6</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xafbA321B14A22501466d18eA0D9616f8e90Fc378/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-WBTC</div> <p class="font-size-12 text-break w-sm-full">0xafbA321B14A22501466d18eA0D9616f8e90Fc378</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xe11248e5c0a98038633603F291267b74183AB7be/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-LINK</div> <p class="font-size-12 text-break w-sm-full">0xe11248e5c0a98038633603F291267b74183AB7be</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xAF1F77739E87a1bDA1114e13d4aF86c8546f3996/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-USDT</div> <p class="font-size-12 text-break w-sm-full">0xAF1F77739E87a1bDA1114e13d4aF86c8546f3996</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xdC3F53a364BE3b38d6f8e6a087f61cb2af58FC51/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-SUSHI</div> <p class="font-size-12 text-break w-sm-full">0xdC3F53a364BE3b38d6f8e6a087f61cb2af58FC51</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x8eE25bdfe0B749B78157505B92bd919414Af696c/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-UNI</div> <p class="font-size-12 text-break w-sm-full">0x8eE25bdfe0B749B78157505B92bd919414Af696c</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x47F884e0bfC0e56eCDc581e2774efeC12874f7FD/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-AAVE</div> <p class="font-size-12 text-break w-sm-full">0x47F884e0bfC0e56eCDc581e2774efeC12874f7FD</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x93bc576943Ef7452888dD810f502595Ee83187EE/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-YFI</div> <p class="font-size-12 text-break w-sm-full">0x93bc576943Ef7452888dD810f502595Ee83187EE</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x53a6fFE10AdB8db0D861BF264134D42CAC03a1Bd/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png> <div class=font-weight-bold>Strategy PNG-DAI</div> <p class="font-size-12 text-break w-sm-full">0x53a6fFE10AdB8db0D861BF264134D42CAC03a1Bd</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x2D26A50d4b4213b5Bd3e4856A6acdfc493D0b12b/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>Strategy AVAX-ETH</div> <p class="font-size-12 text-break w-sm-full">0x2D26A50d4b4213b5Bd3e4856A6acdfc493D0b12b</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x08d8C7C1a6E8543a4674E77cc0111EAa1D520f8b/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>Strategy AVAX-PNG</div> <p class="font-size-12 text-break w-sm-full">0x08d8C7C1a6E8543a4674E77cc0111EAa1D520f8b</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xe34e6d0992Aaeb9F313A455A9a030Ce677Acc60e/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>Strategy AVAX-SUSHI</div> <p class="font-size-12 text-break w-sm-full">0xe34e6d0992Aaeb9F313A455A9a030Ce677Acc60e</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x974Ef0bDA58C81F3094e124f530eF34fe70dc103/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>Strategy AVAX-LINK</div> <p class="font-size-12 text-break w-sm-full">0x974Ef0bDA58C81F3094e124f530eF34fe70dc103</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0xFccb3EAE602Cc663BD8a841CD13AE3bE5026441e/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>Strategy AVAX-USDT</div> <p class="font-size-12 text-break w-sm-full">0xFccb3EAE602Cc663BD8a841CD13AE3bE5026441e</p> </div> </div> </a> <a href=https://cchain.explorer.avax.network/address/0x846275D9153f6c89dE066b5EAF9DEb658298f54b/contracts target=_blank class="col-sm-3 pb-4 mx-auto"> <div class="card br-25 border border-2 snob-tokens"> <div class="card-body text-center"> <img class=rounded-circle width=48 src=https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png alt="AVAX-USDT Pangolin LP"> <div class=font-weight-bold>Strategy AVAX-WBTC</div> <p class="font-size-12 text-break w-sm-full">0x846275D9153f6c89dE066b5EAF9DEb658298f54b</p> </div> </div> </a> </div> </div> </section> <div class="container-lg text-center"> <div class="row mx-auto pt-20 pb-20 bg-transparent"> <div class="col-md-12 text-center"> <ul class="navbar-nav d-none d-md-inline-flex mx-auto"> <li class="nav-item p-10"> <a href=https://twitter.com/throwsnowballs target=_blank rel=noopener class=custom-footer-link> <ion-icon name=logo-twitter></ion-icon> Twitter </a> </li> <li class="nav-item p-10"> <a href=https://discord.gg/T35jZ2hhPZ target=_blank rel=noopener class=custom-footer-link> <ion-icon name=logo-discord></ion-icon> Discord </a> </li> <li class="nav-item p-10"> <a href=https://medium.com/snowball-finance/snowball-finance-launce-68554044bdd2 target=_blank rel=noopener class=custom-footer-link> <ion-icon name=logo-medium></ion-icon> Medium </a> </li> <li class="nav-item p-10"> <a href=https://t.me/throwsnowballs target=_blank rel=noopener class=custom-footer-link> <ion-icon name=paper-plane-outline></ion-icon> Telegram </a> </li> <li class="nav-item p-10"> <a href=https://snowballs.gitbook.io/snowball-docs/ target=_blank rel=noopener class=custom-footer-link> <ion-icon name=book-outline></ion-icon> Docs </a> </li> </ul> </div> <div class="col-md-12 text-center"> </div> </div> </div> <script>function snowballDarkmode(){if("true"==window.localStorage.getItem("snowballDarkmode")){document.body.classList.remove("dark-mode"),window.localStorage.setItem("snowballDarkmode",!1);var o=document.querySelector(".styleMode");o&&(o.classList.add("fa-moon-o"),o.classList.remove("fa-sun-o"))}else document.body.classList.add("dark-mode"),window.localStorage.setItem("snowballDarkmode",!0),(o=document.querySelector(".styleMode"))&&o.attr("name",function(o,e){return"menu-outline"==e?"close-outline":"menu-outline"})}null===localStorage.getItem("snowballDarkmode")&&(document.body.classList.add("dark-mode"),window.localStorage.setItem("snowballDarkmode",!0),icon.classList.remove("fa-moon-o"),icon.classList.add("fa-sun-o"))</script> <script src=https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js></script> </div> </div> <!-- Content particles --> <div id=particles-js></div> <!-- Content particles end --> </div> <script src=https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js></script> <script>document.addEventListener("DOMContentLoaded",function(){particlesJS.load("particles-js","/particlesjs-config.json",function(){})})</script> <link href=https://unpkg.com/aos@2.3.1/dist/aos.css rel=stylesheet> <script src=https://unpkg.com/aos@2.3.1/dist/aos.js></script> <script>AOS.init()</script> </body> </html> 
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+     
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+ <!-- Primary Meta Tags --> 
+      <title>Snowball</title>
+      <meta name=title content=Snowball>
+      <meta name=description content="❄️ DeFi on Avalanche">
+      <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> 
+      <meta property=og:type content=website>
+      <meta property=og:url content=https://snowballfinance.info/ >
+      <meta property=og:title content=Snowball>
+      <meta property=og:description content="❄️ DeFi on Avalanche"> 
+      <meta property=twitter:card content=summary>
+      <meta property=twitter:url content=https://snowballfinance.info/ >
+      <meta property=twitter:title content=Snowball>
+      <meta property=twitter:description content="❄️ DeFi on Avalanche">
+      <meta name=twitter:image content="https://media.discordapp.net/attachments/818991928951439371/821075255544119396/image0.png?width=630&height=630">
+      <meta property=twitter:image content="https://media.discordapp.net/attachments/818991928951439371/821075255544119396/image0.png?width=630&height=630">
+      <!--<link rel=stylesheet href=/css/index.3a2b474646c76249387a2e9e5547eaaf.css>
+      
+
+      <link rel=preload href=/js/vendor.8679387885efab33624352dabecf096d.js as=script>
+      <link rel=prefetch href=/js/vendor.8679387885efab33624352dabecf096d.js>
+      <link rel=preload href=/js/app.d1e3aa04f687b8296516043e8cf83df8.js as=script>
+      <link rel=prefetch href=/js/app.d1e3aa04f687b8296516043e8cf83df8.js> -->
+      <meta name=theme-color content=#ffffff>
+      <link rel="shortcut icon" href=/favicon.ico>
+      <link rel=icon href=/favicon.ico>
+      <link rel=apple-touch-icon href=/apple-touch-icon.png>
+      <link rel=manifest href=/manifest.json>  
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- jquery-ui.min css -->
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <!-- meanmenu css -->
+    <link rel="stylesheet" href="css/meanmenu.min.css">
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- bxslider css -->
+    <!--flaticon css -->
+    <link rel="stylesheet" href="css/flaticon.css">
+    <!-- font-awesome css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- modernizr css -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- google fonts --> 
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto&display=swap" rel="stylesheet"> 
+</head>
+
+<body>
+    <a href="javascript:" id="return-to-top"><i class="fa fa-angle-up"></i></a>
+    <!-- preloader Start -->
+    <!-- <div id="preloader">
+        <div id="status"><img src="images/banner/loader.gif" id="preloader_image" alt="loader">
+        </div>
+    </div> -->
+    <!--Header area start here-->
+    <div section-scroll='0' class="wd_scroll_wrap">
+        <header class="gc_main_menu_wrapper">
+            <div class="container">
+                <div class="row vertical-align">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-6">
+                        <div class="logo-area">
+                            <a href="/"><img src="images/logo/logo.png" alt="logo" width="150" /></a>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu  Start -->
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-6 ">
+                        <div class="menu-area  hidden-xs  align-middle">
+                            <nav class="wd_single_index_menu snowball_main_menu" >
+                                <ul> 
+                                    <li><a href="https://app.snowball.network/stablevault">StableVault</a></li>
+                                    <li><a href="https://app.snowball.network/compound">Compound</a></li>
+                                    <li><a href="https://app.snowball.network/earn">Earn SNOB</a></li>
+                                    <li><a href="https://app.snowball.network/governance">Governance</a></li>
+                                    <li><a href="https://app.snowball.network/nft">NFT</a></li>
+                                    <li><a href="https://snowballs.gitbook.io/snowball-docs/" target="_blank">Docs</a></li>
+                                </ul>
+                            </nav>
+
+
+     
+                            <!-- SnowBall app button if ever needed -->
+                            <!--div class="login-btn">
+                                <a href="#" class="btn1"><span>Launch App</span></a>b
+                            </div-->
+                        </div>
+                        <!-- mobile menu area start -->
+                        <div class="rp_mobail_menu_main_wrapper visible-xs">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="toggle">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" class="menuIcon" x="0px" y="0px" viewBox="0 0 31.177 31.177" style="enable-background:new 0 0 31.177 31.177;" xml:space="preserve" width="25px" height="25px">
+                                            <g>
+                                                <g>
+                                                    <path class="menubar" d="M30.23,1.775H0.946c-0.489,0-0.887-0.398-0.887-0.888S0.457,0,0.946,0H30.23    c0.49,0,0.888,0.398,0.888,0.888S30.72,1.775,30.23,1.775z" fill="#fff" />
+                                                </g>
+                                                <g>
+                                                    <path class="menubar" d="M30.23,9.126H12.069c-0.49,0-0.888-0.398-0.888-0.888c0-0.49,0.398-0.888,0.888-0.888H30.23    c0.49,0,0.888,0.397,0.888,0.888C31.118,8.729,30.72,9.126,30.23,9.126z" fill="#fff" />
+                                                </g>
+                                                <g>
+                                                    <path class="menubar" d="M30.23,16.477H0.946c-0.489,0-0.887-0.398-0.887-0.888c0-0.49,0.398-0.888,0.887-0.888H30.23    c0.49,0,0.888,0.397,0.888,0.888C31.118,16.079,30.72,16.477,30.23,16.477z" fill="#fff" />
+                                                </g>
+                                                <g>
+                                                    <path class="menubar" d="M30.23,23.826H12.069c-0.49,0-0.888-0.396-0.888-0.887c0-0.49,0.398-0.888,0.888-0.888H30.23    c0.49,0,0.888,0.397,0.888,0.888C31.118,23.43,30.72,23.826,30.23,23.826z" fill="#fff" />
+                                                </g>
+                                                <g>
+                                                    <path class="menubar" d="M30.23,31.177H0.946c-0.489,0-0.887-0.396-0.887-0.887c0-0.49,0.398-0.888,0.887-0.888H30.23    c0.49,0,0.888,0.398,0.888,0.888C31.118,30.78,30.72,31.177,30.23,31.177z" fill="#fff" />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sidebar">
+                                <div class="mobileLogo"><a href="/"><img src="images/logo/logo.png" alt="logo" width="150" /></a></div>
+                                <div id="toggle_close">&times;</div>
+                                <div id='cssmenu' class="wd_single_index_menu">
+                                    <ul>
+                                        <li><a href="https://app.snowball.network/stablevault">StableVault</a></li>
+                                        <li><a href="https://app.snowball.network/compound">Compound</a></li>
+                                        <li><a href="https://app.snowball.network/earn">Earn SNOB</a></li>
+                                        <li><a href="https://app.snowball.network/governance">Governance</a></li>
+                                        <li><a href="https://app.snowball.network/nft">NFT</a></li>
+                                        <li><a href="https://snowballs.gitbook.io/snowball-docs/" target="_blank">Docs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu  End -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--Header area end here-->
+        <!--Slider area start here-->
+        <section class="slider-area" style="background-color: #1c2132">
+            <div id="particles-js">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <div class="carousel-captions caption-1">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                                            <div class="slider-content" data-animation="animated fadeIn">
+                                                <h2>Snowball Your Returns</h2>
+                                                <p style="font-size: 1.2em; color:#c2c4e8; ">Snowball combines multiple DeFi protocols to create an interconnected experience. Swap stablecoins, deposit liquidity, or auto-compound liquidity rewards. </p>
+                                                <div class="buttonss">
+                                                 <h3 class="white">$10,900,100 TVL</h3>
+                                                     
+                                                    <a href="https://app.pangolin.exchange/#/swap?inputCurrency=avax&outputCurrency=0xc38f41a296a4493ff429f1238e030924a1542e50" class="btn1 mr-l0 mr-b50" data-animation="animated pulse">Buy SNOB</a>
+                                                </div>
+                                            </div>
+
+                                            	        <div class="team-area">
+<div id="particles-team">
+<div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">
+                            <div class="team-list2"  >
+                                <div class="conte">
+                                    <div class="dbox1">
+                                        <div class="">
+                                            <div class="content alignCenter">
+                                                <h3>StableVault</h3> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="con snowProdBox scrollMe">
+                                        <p> StableVault allows anyone to buy and sell stablecoins with near-zero fees and virtually no slippage.</p>
+                                        
+                                        <p class="alignCenter"><a href="https://app.snowball.network/stablevault" class="btn1" data-animation="animated pulse">StableVault 🏦 </a></p>
+                                        <p class="alignCenter mr-t15"><a href="https://snowballs.gitbook.io/snowball-docs/understanding-snowball/stablevault" >Learn More <i class="fa fa-book" aria-hidden="true"></i> </a> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">
+                            <div class="team-list2">
+                                <div class="conte">
+                                    <div class="dbox1">
+                                        <div class="">
+                                            <div class="content alignCenter">
+                                                <h3>SnowGlobes</h3> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="con snowProdBox scrollMe">
+                                        <p>Supercharge your yield-farming strategy by using Snowball to compound your rewards automatically.</p>
+                                        
+                                        <p class="alignCenter"><a href="https://app.snowball.network/compound" class="btn1" data-animation="animated pulse">Snowglobes 🌐 </a></p>
+                                        <p class="alignCenter mr-t15"><a href="https://snowballs.gitbook.io/snowball-docs/understanding-snowball/snowglobes" >Learn More <i class="fa fa-book" aria-hidden="true"></i> </a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 hidden-xs hidden-sm">
+                                            <div class="about-img">
+                                                <video class="video-mask" width="500" height="500" src="./images/video/snowball3.mp4" autoplay muted loop>
+                                                </video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Slider area end here-->
+    </div>
+    
+    <div section-scroll='1' class="wd_scroll_wrap">
+        <section class="about-area pd-t70  jarallax bg-img" style="background-color: #1e2644">
+            <div class="container pd-md-r100 pd-md-l100 pd-md-b100">
+                  
+                        <div class="row" >
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 white">
+                              <h2 class="f-40 fw-400 wow  fadeInUp animated" data-wow-duration="1.0s" style="visibility: visible; animation-duration: 1.0s; animation-name: fadeInUp;">On-Chain Governance is live!</h2>
+                                <p> Governance is live, which means you can now determine the future of Snowball. Whether you hold SNOB or have liquidity in the SNOB/AVAX pool, you can vote.  </p><p>Make your SNOB count. 
+</p>
+ <a href="https://snowball.network/governance/" target="_blank" class="btn1 mr-b50">Vote</a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 team-area"> 
+                            	  <div class="team-list2 heightAuto"  >
+                                <div class="govBox conte ">
+                                    <div class="dbox">
+                                        <div class="dright2">
+                                            <div class="content">
+                                                <h3>Recent Proposals</h3> 
+                                                <p><b># 1: Buyback Snowballs with 50% of Fees</b><br><span class="small text-success"> For: 6870.52</span>  <span class="small floatright text-warning">Against: 45.21</p>
+                                                <p><b># 2: Prolong Snowball Emissions for 14M Blocks </b><br><span class="small text-success"> For: 6401.29</span>  <span class="small floatright text-warning">Against: 337.91</p>
+                                                <p><b># 3: 1st Budget Proposal: $81,225 </b><br><span class="small text-success"> For: 5524.12</span>  <span class="small floatright text-warning">Against: 80.93</p>
+                                                <span class="small floatright "><a href="https://app.snowball.network/governance"> See All > </a></span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                                 
+                            </div> 
+                        </div>
+                  
+                
+                
+            </div>
+            <div class="sud">
+
+
+            	   <svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 181.1" style="enable-background:new 0 0 1920 181.1; background-color: #1e2644" xml:space="preserve">
+                    <style type="text/css">
+                        .st0 {
+                            fill-rule: evenodd;
+                            clip-rule: evenodd;
+                            background-color: white;
+                            fill:#f8fcfd !important;
+                        }
+                    </style>
+
+                    <g>
+                        <path class="st0" d="M0,80c0,0,28.9-4.2,43-13c14.3-9,71-35.7,137,5c17.3,7.7,33.3,13,48,11c17.3,0.3,50.3,4.7,66,23
+                         c20.3,9.7,68,40.3,134-12c24-11,59-16.3,104,2c21,7.3,85,27.7,117-14c24-30.7,62.7-55,141-12c26,10.3,72,14.7,110-14
+                         c37.7-19,89.7-29,122,53c23,32.7,47.7,66.3,97,26c24-22.7,51-78.3,137-38c0,0,28.3,15.7,52,15c23.7-0.7,50.7,4.3,76,41
+                         c19.7,19.7,71,36.7,121-2c0,0,22.3-16,55-12c0,0,32.7,6.7,56-71c23.3-76,79-92,122-29c9.3,13.7,25,42,62,43c37,1,51.7,25.3,67,48
+                         c15.3,22.7,51,22.7,53,23v28.1H0V80z" />
+                    </g>
+                </svg>
+            </div>
+        </section> 
+        
+    </div>
+    <div section-scroll='2' class="wd_scroll_wrap">
+        <section class="features-area section" style="background-color: #f8fcfd;">
+            <div id="features-js">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="section-heading2 wow  fadeInUp animated" data-wow-duration="1.0s" style="visibility: visible; animation-duration: 1.0s; animation-name: fadeInUp;">
+                                <h2>Roadmap</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="featured-lists">
+                                <ul>
+                                    <li>
+                                        <div class="col-sm-6 pd-0 hidden-xs wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="contents-l mr-b30">
+                                                <h2>2021 Q2</h2>
+                                                <p><b>Partnerships</b> - Our future partnerships will reduce duplicate work, increase specialization, and leverage shared expertise.</p>
+                                                <p><b>Pangolin Rewards</b> - Add PNG rewards to the SNOB token on <a href="https://pangolin.exchange/" target="blank">Pangolin Exchange</a> - Avalanche's largest DEX.</p>
+                                                <p><b>Promotional NFTs</b> - We want to recognize and reward our users and community participants.</p>
+                                                <p><b>s3F StableVault</b> - We partnered with <a href="https://frax.finance/" target="_blank">Frax Finance</a> to bring Frax stablecoin to Avalanche network.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0  wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="imgs-l">
+                                                <figure><img src="images/features/7.png" alt="" /></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 visible-xs wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="contents-l mr-b30">
+                                                <h2>2021 Q2</h2>
+                                                <p><b>Partnerships</b> - Our future partnerships will reduce duplicate work, increase specialization, and leverage shared expertise.</p>
+                                                <p><b>Partnerships</b> - Add the SNOB token to Avalanche's largest DEX - Pangolin Exchange.</p>
+                                                <p><b>Promotional NFTs</b> - We want to recognize and reward our users and community participants.</p>
+                                                <p><b>s3F StableVault</b> - We partnered with Frax Finance to bring Frax stablecoin to Avalanche network.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="rl">
+                                        <div class="col-sm-6 pd-0 floatright mr-b30 hidden-xs wow  fadeInUp animated" data-wow-duration="2.1s" style="visibility: visible; animation-duration: 2.1s; animation-name: fadeInUp;">
+                                            <div class="contents-r">
+                                                <h2>On-Chain Governance <span class="tickedTimeline">✔</span></h2>
+                                                <p>Reciprocity is one of the main forms of human sociality and is defined as: cooperation for mutual benefit. Governance works better when people can feel comfortable making a decision. We recently launched our on-chain governance.</p>
+                                                <a href="https://app.snowball.network/governance" class="btn1">Vote</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 wow  fadeInUp animated" data-wow-duration="2.1s" style="visibility: visible; animation-duration: 2.1s; animation-name: fadeInUp;">
+                                            <div class="imgs-r">
+                                                <figure><img src="images/features/6.png" alt="" /></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 floatright mr-b30 visible-xs wow  fadeInUp animated" data-wow-duration="2.1s" style="visibility: visible; animation-duration: 2.1s; animation-name: fadeInUp;">
+                                            <div class="contents-r">
+                                                <h2>On-Chain Governance <span class="tickedTimeline">✔</span></h2>
+                                                <p>Reciprocity is one of the main forms of human sociality and is defined as: cooperation for mutual benefit. Governance works better when people can feel comfortable making a decision. We recently launched our on-chain governance.</p>
+                                                <a href="https://app.snowball.network/governance" class="btn1">Vote</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-sm-6 pd-0 hidden-xs">
+                                            <div class="contents-l mr-b30 wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">
+                                                <h2>Strong Community <span class="tickedTimeline">✔</span></h2>
+                                                <p>We have one of the most active communities on Avalanche protocol. We love collective decisions. Almost everything you see and read on our platform have been created collectively. </p>
+                                                <a href="https://discord.gg/T35jZ2hhPZ" target="_blank" class="btn1">Join us!</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">
+                                            <div class="imgs-l">
+                                                <figure><img src="images/features/1.png" alt="" /></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 visible-xs  wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">
+                                            <div class="contents-l mr-b30">
+                                               <h2>Strong Community <span class="tickedTimeline">✔</span></h2>
+                                                <p>We have one of the most active communities on Avalanche protocol. We love collective decisions. Almost everything you see and read on our platform have been created collectively. </p>
+                                                <a href="https://discord.gg/T35jZ2hhPZ" target="_blank" class="btn1">Join us!</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="rl">
+                                        <div class="col-sm-6 pd-0 floatright mr-b30 hidden-xs wow  fadeInUp animated" data-wow-duration="1.6s" style="visibility: visible; animation-duration: 1.6s; animation-name: fadeInUp;">
+                                            <div class="contents-r">
+                                                <h2>Timelocks & Multisig<span class="tickedTimeline">✔</span></h2>
+                                                <p>All key admin functions on contracts, which also controls the emission of SNOB to the pools are controlled by a 24 hour time lock contract and must be executed through a community multisig wallet.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 wow  fadeInUp animated" data-wow-duration="1.6s" style="visibility: visible; animation-duration: 1.6s; animation-name: fadeInUp;">
+                                            <div class="imgs-r">
+                                                <figure><img src="images/features/2.png" alt="" /></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 floatright mr-b30 visible-xs">
+                                            <div class="contents-r wow  fadeInUp animated" data-wow-duration="1.6s" style="visibility: visible; animation-duration: 1.6s; animation-name: fadeInUp;">
+                                                <h2>Timelocks & Multisig<span class="tickedTimeline">✔</span></h2>
+                                                <p>All key admin functions on contracts, which also controls the emission of SNOB to the pools are controlled by a 24 hour time lock contract and must be executed through a community multisig wallet.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-sm-6 pd-0 hidden-xs wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="contents-l mr-b30">
+                                                <h2>Total Value Locked(TVL) <span class="tickedTimeline">✔</span></h2>
+                                                <p><h4>$10M+</h4></p>
+                                                <p>In a very short period of time, we already passed our first TVL goal.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0  wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="imgs-l">
+                                                <figure><img src="images/features/3.png" alt="" /></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 visible-xs wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="contents-l mr-b30">
+                                               <h2>Total Value Locked(TVL) <span class="tickedTimeline">✔</span></h2>
+                                                <p><h4>$10M+</h4></p>
+                                                <p>In a very short period of time, we already passed our first TVL goal.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="rl">
+                                        <div class="col-sm-6 pd-0 floatright mr-b30 hidden-xs wow  fadeInUp animated" data-wow-duration="2.1s" style="visibility: visible; animation-duration: 2.1s; animation-name: fadeInUp;">
+                                            <div class="contents-r">
+                                               <h2>New DeFi tools <span class="tickedTimeline">✔</span></h2>
+                                                <p>We are constantly working on creating new DeFi tools to increase our product value, after our infamous compounding tool we recently launched StableVault, a new lending solution, low slippage stablecoin exchange. We will continue adding new products to our platform.</p>
+                                                <a href="https://app.snowball.network/stablevault" class="btn1">StableVault</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 wow  fadeInUp animated" data-wow-duration="2.1s" style="visibility: visible; animation-duration: 2.1s; animation-name: fadeInUp;">
+                                            <div class="imgs-r">
+                                                <figure><img src="images/features/4.png" alt="" /></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 floatright mr-b30 visible-xs wow  fadeInUp animated" data-wow-duration="2.1s" style="visibility: visible; animation-duration: 2.1s; animation-name: fadeInUp;">
+                                            <div class="contents-r">
+                                                <h2>New DeFi tools <span class="tickedTimeline">✔</span></h2>
+                                                <p>We are constantly working on creating new DeFi tools to increase our product value, after our infamous compounding tool we recently launched StableVault, a new lending solution, low slippage stablecoin exchange. We will continue adding new products to our platform.</p>
+                                                <a href="https://app.snowball.network/stablevault" class="btn1">StableVault</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="col-sm-6 pd-0 hidden-xs wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="contents-l mr-b30">
+                                                 <h2>UX Update<span class="tickedTimeline">✔</span></h2>
+                                                <p>We launched our improved user interface and we are continuously working on improving with the feedback from our community. <br>You can leave feedback and join the discussion on how we can improve it further.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0  wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="imgs-l">
+                                                <figure><img src="images/features/5.png" alt="" /></figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 pd-0 visible-xs wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                            <div class="contents-l mr-b30">
+                                                   <h2>UX Update <span class="tickedTimeline">✔</span></h2>
+                                                <p>We launched our improved user interface and we are continuously working on improving with the feedback from our community. <br>You can leave feedback and join the discussion on how we can improve it further.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div section-scroll='6' class="wd_scroll_wrap">
+        <div class="sud" style="background-color:rebeccapurple;">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 181.1" style="enable-background:new 0 0 1920 181.1; background-color: #f8fcfd;" xml:space="preserve">
+                <style type="text/css">
+                    .st1 {
+                        fill-rule: evenodd;
+                        clip-rule: evenodd;
+                    }
+                </style>
+                <g>
+                    <path class="st1" style="fill: white !important;" d="M0,80c0,0,28.9-4.2,43-13c14.3-9,71-35.7,137,5c17.3,7.7,33.3,13,48,11c17.3,0.3,50.3,4.7,66,23
+                     c20.3,9.7,68,40.3,134-12c24-11,59-16.3,104,2c21,7.3,85,27.7,117-14c24-30.7,62.7-55,141-12c26,10.3,72,14.7,110-14
+                     c37.7-19,89.7-29,122,53c23,32.7,47.7,66.3,97,26c24-22.7,51-78.3,137-38c0,0,28.3,15.7,52,15c23.7-0.7,50.7,4.3,76,41
+                     c19.7,19.7,71,36.7,121-2c0,0,22.3-16,55-12c0,0,32.7,6.7,56-71c23.3-76,79-92,122-29c9.3,13.7,25,42,62,43c37,1,51.7,25.3,67,48
+                     c15.3,22.7,51,22.7,53,23v28.1H0V80z" />
+                </g>
+            </svg>
+        </div>
+<!--        <section class="tokens-area section" style="background-color: #ffffff; padding-bottom: 0;" >-->
+<!--            <div id="token-js">-->
+<!--                <div class="">-->
+<!--                    <div class="row blur">-->
+<!--                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 hidden-xs">-->
+<!--                            <div class="leftABG">-->
+<!--                                <img src="images/about/3.png">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="padding: 0 30px 0 30px;">-->
+<!--                            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" style="margin-top: 10%; ">-->
+
+<!--                            	 &lt;!&ndash;Annoying alignment issue in this block, rewrite /Jahn&ndash;&gt;-->
+
+
+
+<!--                              <style>-->
+<!--.carousel-inner div h1{-->
+<!--	font-size: 3rem; font-family: 'Montserrat';-->
+<!--	color:#20293e !important;-->
+<!--}-->
+
+<!--.carousel-inner div span{-->
+<!--	color: #3d83b6;margin-left: 45%;-->
+<!--}-->
+
+<!--                              </style>-->
+<!--                                &lt;!&ndash; Wrapper for slides &ndash;&gt;-->
+<!--                                <div class="carousel-inner" style="padding-left: 5%; max-width: 550px;">-->
+<!--                                  <div class="item active">-->
+<!--                                    <h1 >DeFi Gravity <br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp on Avalanche!</h1>-->
+<!--                                    <span >Suggested by: UserName4125</span>-->
+<!--                                  </div>-->
+<!--                              -->
+<!--                                  <div class="item">-->
+<!--                                    <h1  >The coolest way <br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp to compound</h1>-->
+<!--                                    <span  >Suggested by: UserName4127</span>-->
+<!--                                  </div>-->
+<!--                              -->
+<!--                                  <div class="item">-->
+<!--                                    <h1  >Be cool. Compound</h1>-->
+<!--                                    <span  >Suggested by: UserName5000</span>-->
+<!--                                  </div>-->
+
+<!--                                  <div class="item">-->
+<!--                                    <h1 >Earn more. Do less. </h1>-->
+<!--                                    <span >Suggested by: UserName5000</span>-->
+<!--                                  </div>-->
+
+<!--                                  <div class="item">-->
+<!--                                    <h1 >It gets bigger</h1>-->
+<!--                                    <span  >Suggested by: UserName5000</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                              -->
+<!--                                &lt;!&ndash; Left and right controls &ndash;&gt;-->
+<!--                                <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background: none;">-->
+<!--                                  <span class="glyphicon glyphicon-chevron-left"></span>-->
+<!--                                  <span class="sr-only">Previous</span>-->
+<!--                                </a>-->
+<!--                                <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background: none;">-->
+<!--                                  <span class="glyphicon glyphicon-chevron-right"></span>-->
+<!--                                  <span class="sr-only">Next</span>-->
+<!--                                </a>-->
+<!--                              </div>-->
+
+
+
+
+
+<!--  <div style="padding-top: 25%; ">-->
+<!--                            <h2 style=" color: #33a9ff; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 25px; ">Community Tagline Contest</h2>-->
+<!--                            <p style="font-family: 'Montserrat', sans-serif; color: #424b52;">Join our tagline contest, Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation </p>-->
+<!-- -->
+<!--        <div class="team-area">                    -->
+<!--<div id="particles-team">-->
+<!--<div class="row">-->
+<!--                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">-->
+<!--                            <div class="team-list2"  >-->
+<!--                                <div class="conte">-->
+<!--                                    <div class="dbox">-->
+<!--                                        <div class="dright">-->
+<!--                                            <div class="content">-->
+<!--                                                <h3>Community</h3> -->
+<!--                                                 <ul class="listInBox"><li>Snowball NFTs are here! Snowballuphill -->
+
+<!--If you voted on Proposal 1 or Proposal 2, you can claim an Early Voter NFT</li><li>-->
+<!--Snowball Workshop for All Interested April 13, 2020 in the Discord Voice Channel-->
+<!--8:00 PM Tuesday, Coordinated Universal Time (UTC) is the Current Scheduled Time</li></ul>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div> -->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">-->
+<!--                            <div class="team-list2">-->
+<!--                                <div class="conte">-->
+<!--                                    <div class="dbox">-->
+<!--                                        <div class="dright">-->
+<!--                                            <div class="content">-->
+<!--                                                <h3>Announcements</h3>-->
+<!--                                                <ul class="listInBox"><li>Snowball NFTs are here! Snowballuphill -->
+
+<!--If you voted on Proposal 1 or Proposal 2, you can claim an Early Voter NFT</li><li>-->
+<!--Snowball Workshop for All Interested April 13, 2020 in the Discord Voice Channel-->
+<!--8:00 PM Tuesday, Coordinated Universal Time (UTC) is the Current Scheduled Time</li></ul>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div> -->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--                        </div>-->
+
+
+
+
+
+
+
+
+
+<!--                        </div>-->
+<!--                      -->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
+        <section class="blog-area section" style="padding-top: 0!important; padding-bottom: 0; background-color: transparent;">
+            <div class="sud" style="background-color: transparent;">
+                <svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 
+                    viewBox="0 0 1920 181.1" style="enable-background:new 0 0 1920 181.1;" xml:space="preserve">
+                    <style type="text/css">
+                        .st2 {
+                            fill-rule: evenodd;
+                            clip-rule: evenodd;
+                            fill: #c7d8ef57 !important;
+                        }
+                    </style>
+                    <g>
+                        <path class="st2" d="M0,80c0,0,28.9-4.2,43-13c14.3-9,71-35.7,137,5c17.3,7.7,33.3,13,48,11c17.3,0.3,50.3,4.7,66,23
+                         c20.3,9.7,68,40.3,134-12c24-11,59-16.3,104,2c21,7.3,85,27.7,117-14c24-30.7,62.7-55,141-12c26,10.3,72,14.7,110-14
+                         c37.7-19,89.7-29,122,53c23,32.7,47.7,66.3,97,26c24-22.7,51-78.3,137-38c0,0,28.3,15.7,52,15c23.7-0.7,50.7,4.3,76,41
+                         c19.7,19.7,71,36.7,121-2c0,0,22.3-16,55-12c0,0,32.7,6.7,56-71c23.3-76,79-92,122-29c9.3,13.7,25,42,62,43c37,1,51.7,25.3,67,48
+                         c15.3,22.7,51,22.7,53,23v28.1H0V80z" />
+                    </g>
+                </svg>
+            </div>
+            <div style="background-color: #c7d8ef57; padding-bottom: 100px;">
+                <div class="container pd-t70">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="section-heading2">
+                                <h2 class="wow  fadeInUp animated" data-wow-duration="1.0s" style="visibility: visible; animation-duration: 1.0s; animation-name: fadeInUp;">Learn more</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="blog-slider">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="blog wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">
+                                    <figure><img src="images/blog/4.png" alt="" /></figure>
+                                    <div class="content">
+                                        <span><i class="fa  fa-calendar-o"></i>Apr 21, 2021</span>
+                                        <h4><a target="_blank" href="https://medium.com/snowball-finance/introducing-the-s3f-stablevault-915df7d1c624">Introducing the S3F StableVault</a></h4>
+                                        <p>StableVault provides important infrastructure for the DeFi ecosystem and makes it easy to swap stable assets with low fees and low slippage. </p>
+                                        <a target="_blank" href="https://medium.com/snowball-finance/introducing-the-s3f-stablevault-915df7d1c624" class="blog-btn">read more <i class="fa  fa-arrow-circle-o-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="blog wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;">
+                                    <figure><img src="images/blog/5.png" alt="" /></figure>
+                                    <div class="content">
+                                        <span><i class="fa  fa-calendar-o"></i>Mar 27, 2021</span>
+                                        <h4><a target="_blank" href="https://medium.com/snowball-finance/stable-asset-swapping-with-snowball-c4f51c95df5e">Stable Asset Swapping with Snowball</a></h4>
+                                        <p>Earlier this month Snowball launched as one of the first auto-compounding protocols on Avalanche. We’ve seen excellent adoption and recently reached a milestone of $20 million total value locked (TVL). </p>
+                                        <a target="_blank" href="https://medium.com/snowball-finance/stable-asset-swapping-with-snowball-c4f51c95df5e" class="blog-btn">read more <i class="fa  fa-arrow-circle-o-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="blog wow  fadeInUp animated" data-wow-duration="1.6s" style="visibility: visible; animation-duration: 1.6s; animation-name: fadeInUp;">
+                                    <figure><img src="images/blog/1.jpg" alt="" /></figure>
+                                    <div class="content">
+                                        <span><i class="fa  fa-calendar-o"></i>March 10, 2021</span>
+                                        <h4><a target="_blank" href="https://throwsnowballs.medium.com/snowball-protocol-user-guide-a6b434bfed30">Snowball Protocol User Guide</a></h4>
+                                        <p>The following document was written explicitly with beginners and non-devs in mind.</p>
+                                        <a target="_blank" href="https://throwsnowballs.medium.com/snowball-protocol-user-guide-a6b434bfed30" class="blog-btn">read more <i class="fa  fa-arrow-circle-o-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="blog wow  fadeInUp animated" data-wow-duration="1.6s" style="visibility: visible; animation-duration: 1.6s; animation-name: fadeInUp;">
+                                    <figure><img src="images/blog/2.jpg" alt="" /></figure>
+                                    <div class="content">
+                                        <span><i class="fa  fa-calendar-o"></i>March 6, 2021</span>
+                                        <h4><a target="_blank" href="https://medium.com/snowball-finance/snowball-finance-launce-68554044bdd2">Snowball Finance Launch</a></h4>
+                                        <p>Snowball is launching alongside other first generation financial protocols on the Avalanche Network. The protocol takes advantage of yield farming on Pangolin and low gas fees on Avalanche to compound (snowball) your returns.</p>
+                                        <a target="_blank" href="https://medium.com/snowball-finance/snowball-finance-launce-68554044bdd2" class="blog-btn">read more <i class="fa  fa-arrow-circle-o-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="blog wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;">
+                                    <figure><img src="images/blog/3.jpg" alt="" /></figure>
+                                    <div class="content">
+                                        <span><i class="fa  fa-calendar-o"></i>January 29, 2018</span>
+                                        <h4><a target="_blank" href="https://medium.com/avalanche-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656">Avalanche Consensus, The Biggest Breakthrough since Nakamoto</a></h4>
+                                        <p>Consensus is the means by which a series of independent voters (often called “validators”) come to an agreement on a decision, ensuring that the network has a synchronized view on the data...</p>
+                                        <a target="_blank" href="https://medium.com/avalanche-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656" class="blog-btn">read more <i class="fa  fa-arrow-circle-o-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        <section class="token-details section bg-img" style="padding-top: 0;">
+            <div class="sud">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 181.1" style="enable-background:new 0 0 1920 181.1; background-color: #c7d8ef57;" xml:space="preserve">
+                    <style type="text/css">
+                        .st3 {
+                            fill-rule: evenodd;
+                            clip-rule: evenodd;
+                        }
+                    </style>
+                    <g>
+                        <path class="st3" style="fill: white !important;" d="M0,80c0,0,28.9-4.2,43-13c14.3-9,71-35.7,137,5c17.3,7.7,33.3,13,48,11c17.3,0.3,50.3,4.7,66,23
+                         c20.3,9.7,68,40.3,134-12c24-11,59-16.3,104,2c21,7.3,85,27.7,117-14c24-30.7,62.7-55,141-12c26,10.3,72,14.7,110-14
+                         c37.7-19,89.7-29,122,53c23,32.7,47.7,66.3,97,26c24-22.7,51-78.3,137-38c0,0,28.3,15.7,52,15c23.7-0.7,50.7,4.3,76,41
+                         c19.7,19.7,71,36.7,121-2c0,0,22.3-16,55-12c0,0,32.7,6.7,56-71c23.3-76,79-92,122-29c9.3,13.7,25,42,62,43c37,1,51.7,25.3,67,48
+                         c15.3,22.7,51,22.7,53,23v28.1H0V80z" />
+                    </g>
+                </svg>
+            </div>
+<!--            <div class="container blur">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--                        <div class="section-heading">-->
+<!--                            <h2 class="wow  fadeInUp animated" data-wow-duration="1.0s" style="visibility: visible; animation-duration: 1.0s; animation-name: fadeInUp;">Distribution of Tokens</h2>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">-->
+<!--                        <div class="tokes-chart-slider wow animate fadeIn" data-wow-duration="1s">-->
+<!--                            <div class="cart-list">-->
+<!--                                <div class="chart col-sm-6">-->
+<!--                                    <div id="e_chart_3" class="" style="height:400px;"></div>-->
+<!--                                    <div class="imgs"><img src="images/logo/Snowball_ball.png" alt="" /></div>-->
+<!--                                </div>-->
+<!--                                <div class="col-sm-6">-->
+<!--                                    <div class="label-chatrs">-->
+<!--                                        <div class="lsits">-->
+
+<!--                                            <span class="clabels-text">80%</span>-->
+<!--                                            <p>Liquidity Provider Incentive</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="lsits">-->
+<!--                                            <span class="clabels-text">10%</span>-->
+<!--                                            <p>Governance Allocation</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="lsits">-->
+<!--                                            <span class="clabels-text">8-9.5%</span>-->
+<!--                                            <p>DevFund</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="lsits">-->
+<!--                                            <span class="clabels-text">0.5-2%</span>-->
+<!--                                            <p>Airdrop</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="cart-list">-->
+<!--                                <div class="chart col-sm-6">-->
+<!--                                    <div id="e_chart_2" class="" style="height:400px;"></div>-->
+<!--                                    <div class="imgs"><img src="images/logo/Snowball_ball.png" alt="" /></div>-->
+<!--                                </div>-->
+<!--                                <div class="col-sm-6">-->
+<!--                                    <div class="label-chatrs">-->
+<!--                                        <div class="lsits">-->
+<!--                                            <span class="clabels-text">80%</span>-->
+<!--                                            <p>Liquidity Provider Incentive</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="lsits">-->
+<!--                                            <span class="clabels-text">10%</span>-->
+<!--                                            <p>Governance Allocation</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="lsits">-->
+<!--                                            <span class="clabels-text">8-9.5%</span>-->
+<!--                                            <p>DevFund</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="lsits">-->
+<!--                                            <span class="clabels-text">0.5-2%</span>-->
+<!--                                            <p>Airdrop</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </section>
+
+
+ 
+
+
+<section id="tokens" class="pd-50">
+	
+  <div class="container text-center mr-t20">
+  	<div class="row">
+    <h2 class="">Tokens 🥇</h2>
+    <div class="row mx-auto p-0 bg-transparent">
+      <a href="https://info.pangolin.exchange/#/token/0xc38f41a296a4493ff429f1238e030924a1542e50" target="_blank" class="col-sm-6 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xc38f41a296a4493ff429f1238e030924a1542e50/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Snowball (SNOB)</div>
+            <p class="small text-break">0xc38f41a296a4493ff429f1238e030924a1542e50</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xdE1A11C331a0E45B9BA8FeE04D4B51A745f1e4A4/transactions" target="_blank" class="col-sm-6 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://raw.githubusercontent.com/Snowball-Finance/Assets/main/S3D.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">StableVault (S3D)</div>
+            <p class="small text-break">0xdE1A11C331a0E45B9BA8FeE04D4B51A745f1e4A4</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+  <div class="container text-center mr-t50">
+    <h2 class="">Contracts 📋</h2>
+
+    <div class="row mx-auto p-0 bg-transparent">
+    	<div class="row">
+      <a href="https://cchain.explorer.avax.network/address/0x6B41E5c07F2d382B921DE5C34ce8E2057d84C042/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://raw.githubusercontent.com/Snowball-Finance/Assets/main/S3D.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">StableVault</div>
+            <p class="small text-break w-sm-full">0x6B41E5c07F2d382B921DE5C34ce8E2057d84C042</p>
+            <div class="my-5">Audited by:</div>
+            <img style="border-radius:50%" src="https://raw.githubusercontent.com/Snowball-Finance/Assets/main/quantstamp.jpeg" width="50px"> <img style="border-radius:50%" src="https://raw.githubusercontent.com/Snowball-Finance/Assets/main/openzeppelin.jpeg" width="50px"> <img style="border-radius:50%" src="https://raw.githubusercontent.com/Snowball-Finance/Assets/main/certik.jpeg" width="50px"> 
+            <div class="my-5">Audits Financed by:</div>
+            <img src="https://raw.githubusercontent.com/Snowball-Finance/Assets/main/saddle.svg" width="50px"> 
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xB12531a2d758c7a8BF09f44FC88E646E1BF9D375/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <div class="tokenIconText">👸</div>
+            <div class="fw-600 snobDarkBLue">IceQueen</div>
+            <p class="small text-break w-sm-full">0xB12531a2d758c7a8BF09f44FC88E646E1BF9D375</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xC38f41A296A4493Ff429F1238e030924A1542e50/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xc38f41a296a4493ff429f1238e030924a1542e50/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Snowball</div>
+            <p class="small text-break w-sm-full">0xC38f41A296A4493Ff429F1238e030924A1542e50</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xf7B8D9f8a82a7a6dd448398aFC5c77744Bd6cb85/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <div class="tokenIconText">🤖</div>
+            <div class="fw-600 snobDarkBLue">Controller</div>
+            <p class="small text-break w-sm-full">0xf7B8D9f8a82a7a6dd448398aFC5c77744Bd6cb85</p>
+          </div>
+        </div>
+      </a>
+  </div>
+      <a href="https://cchain.explorer.avax.network/address/0x53b37b9a6631c462d74d65d61e1c056ea9daa637/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-ETH</div>
+            <p class="small text-break w-sm-full">0x53b37b9a6631c462d74d65d61e1c056ea9daa637</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x763Aa38c837f61DD8429313933Cc47f24E881430/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-WBTC</div>
+            <p class="small text-break w-sm-full">0x763Aa38c837f61DD8429313933Cc47f24E881430</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x392c51Ab0AF3017E3e22713353eCF5B9d6fBDE84/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-LINK</div>
+            <p class="small text-break w-sm-full">0x392c51Ab0AF3017E3e22713353eCF5B9d6fBDE84</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x7987aDB3C789f071FeFC1BEb15Ce6DfDfbc75899/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-USDT</div>
+            <p class="small text-break w-sm-full">0x7987aDB3C789f071FeFC1BEb15Ce6DfDfbc75899</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x8eDd233546730C51a9d3840e954E5581Eb3fDAB1/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-SUSHI</div>
+            <p class="small text-break w-sm-full">0x8eDd233546730C51a9d3840e954E5581Eb3fDAB1</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xcD651AD29835099334d312a9372418Eb2b70c72F/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-DAI</div>
+            <p class="small text-break w-sm-full">0xcD651AD29835099334d312a9372418Eb2b70c72F</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x3270b685A4a61252C6f30c1eBca9DbE622984e22/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-AAVE</div>
+            <p class="small text-break w-sm-full">0x3270b685A4a61252C6f30c1eBca9DbE622984e22</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x14F98349Af847AB472Eb7f7c705Dc4Bee530713B/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-UNI</div>
+            <p class="small text-break w-sm-full">0x14F98349Af847AB472Eb7f7c705Dc4Bee530713B</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x234ed7c95Be12b2A0A43fF602e737225C83c2aa1/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe PNG-YFI</div>
+            <p class="small text-break w-sm-full">0x234ed7c95Be12b2A0A43fF602e737225C83c2aa1</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x586554828eE99811A8ef75029351179949762c26/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe AVAX-ETH</div>
+            <p class="small text-break w-sm-full">0x586554828eE99811A8ef75029351179949762c26</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x621207093D2e65Bf3aC55dD8Bf0351B980A63815/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe AVAX-PNG</div>
+            <p class="small text-break w-sm-full">0x621207093D2e65Bf3aC55dD8Bf0351B980A63815</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x751089F1bf31B13Fa0F0537ae78108088a2253BF/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe AVAX-SUSHI</div>
+            <p class="small text-break w-sm-full">0x751089F1bf31B13Fa0F0537ae78108088a2253BF</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x00933c16e06b1d15958317C2793BC54394Ae356C/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe AVAX-LINK</div>
+            <p class="small text-break w-sm-full">0x00933c16e06b1d15958317C2793BC54394Ae356C</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x3fcFBCB4b368222fCB4d9c314eCA597489FE8605/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe AVAX-USDT</div>
+            <p class="small text-break w-sm-full">0x3fcFBCB4b368222fCB4d9c314eCA597489FE8605</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x39BE35904f52E83137881C0AC71501Edf0180181/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">SnowGlobe AVAX-WBTC</div>
+            <p class="small text-break w-sm-full">0x39BE35904f52E83137881C0AC71501Edf0180181</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xde3bE8a846e4311447462482E91e4b97115222e6/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-ETH</div>
+            <p class="small text-break w-sm-full">0xde3bE8a846e4311447462482E91e4b97115222e6</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xafbA321B14A22501466d18eA0D9616f8e90Fc378/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-WBTC</div>
+            <p class="small text-break w-sm-full">0xafbA321B14A22501466d18eA0D9616f8e90Fc378</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xe11248e5c0a98038633603F291267b74183AB7be/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-LINK</div>
+            <p class="small text-break w-sm-full">0xe11248e5c0a98038633603F291267b74183AB7be</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xAF1F77739E87a1bDA1114e13d4aF86c8546f3996/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-USDT</div>
+            <p class="small text-break w-sm-full">0xAF1F77739E87a1bDA1114e13d4aF86c8546f3996</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xdC3F53a364BE3b38d6f8e6a087f61cb2af58FC51/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-SUSHI</div>
+            <p class="small text-break w-sm-full">0xdC3F53a364BE3b38d6f8e6a087f61cb2af58FC51</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x8eE25bdfe0B749B78157505B92bd919414Af696c/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-UNI</div>
+            <p class="small text-break w-sm-full">0x8eE25bdfe0B749B78157505B92bd919414Af696c</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x47F884e0bfC0e56eCDc581e2774efeC12874f7FD/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-AAVE</div>
+            <p class="small text-break w-sm-full">0x47F884e0bfC0e56eCDc581e2774efeC12874f7FD</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x93bc576943Ef7452888dD810f502595Ee83187EE/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-YFI</div>
+            <p class="small text-break w-sm-full">0x93bc576943Ef7452888dD810f502595Ee83187EE</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x53a6fFE10AdB8db0D861BF264134D42CAC03a1Bd/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0x60781c2586d68229fde47564546784ab3faca982/logo.png" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy PNG-DAI</div>
+            <p class="small text-break w-sm-full">0x53a6fFE10AdB8db0D861BF264134D42CAC03a1Bd</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x2D26A50d4b4213b5Bd3e4856A6acdfc493D0b12b/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy AVAX-ETH</div>
+            <p class="small text-break w-sm-full">0x2D26A50d4b4213b5Bd3e4856A6acdfc493D0b12b</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x08d8C7C1a6E8543a4674E77cc0111EAa1D520f8b/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy AVAX-PNG</div>
+            <p class="small text-break w-sm-full">0x08d8C7C1a6E8543a4674E77cc0111EAa1D520f8b</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xe34e6d0992Aaeb9F313A455A9a030Ce677Acc60e/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy AVAX-SUSHI</div>
+            <p class="small text-break w-sm-full">0xe34e6d0992Aaeb9F313A455A9a030Ce677Acc60e</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x974Ef0bDA58C81F3094e124f530eF34fe70dc103/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy AVAX-LINK</div>
+            <p class="small text-break w-sm-full">0x974Ef0bDA58C81F3094e124f530eF34fe70dc103</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0xFccb3EAE602Cc663BD8a841CD13AE3bE5026441e/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy AVAX-USDT</div>
+            <p class="small text-break w-sm-full">0xFccb3EAE602Cc663BD8a841CD13AE3bE5026441e</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://cchain.explorer.avax.network/address/0x846275D9153f6c89dE066b5EAF9DEb658298f54b/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
+        <div class="card br-25 border border-2 snob-tokens">
+          <div class="card-body text-center">
+            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/logo.png" alt="AVAX-USDT Pangolin LP" width="48"> 
+            <div class="fw-600 snobDarkBLue">Strategy AVAX-WBTC</div>
+            <p class="small text-break w-sm-full">0x846275D9153f6c89dE066b5EAF9DEb658298f54b</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+ 
+
+       
+        <div class="sud">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 181.1" style="enable-background:new 0 0 1920 181.1;" xml:space="preserve">
+                <style type="text/css">
+                    .st4 {
+                        fill-rule: evenodd;
+                        clip-rule: evenodd;
+                        fill: #c7d8ef;
+                    }
+                </style>
+                <g>
+                    <path class="st4" d="M0,80c0,0,28.9-4.2,43-13c14.3-9,71-35.7,137,5c17.3,7.7,33.3,13,48,11c17.3,0.3,50.3,4.7,66,23
+                     c20.3,9.7,68,40.3,134-12c24-11,59-16.3,104,2c21,7.3,85,27.7,117-14c24-30.7,62.7-55,141-12c26,10.3,72,14.7,110-14
+                     c37.7-19,89.7-29,122,53c23,32.7,47.7,66.3,97,26c24-22.7,51-78.3,137-38c0,0,28.3,15.7,52,15c23.7-0.7,50.7,4.3,76,41
+                     c19.7,19.7,71,36.7,121-2c0,0,22.3-16,55-12c0,0,32.7,6.7,56-71c23.3-76,79-92,122-29c9.3,13.7,25,42,62,43c37,1,51.7,25.3,67,48
+                     c15.3,22.7,51,22.7,53,23v28.1H0V80z" />
+                </g>
+            </svg>
+        </div>
+    </div>
+    <div section-scroll='7' class="wd_scroll_wrap">
+        <!--Footer area start here-->
+        <footer class="top-foo">
+            <div id="footer-js">
+                <div class="footer-top section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="con">
+                                    <h2 class="wow  fadeInUp animated mr-b10" data-wow-duration="1.0s" style="visibility: visible; animation-duration: 1.0s; animation-name: fadeInUp;">Subscribe to us!</h2>
+                                    <ul>
+                                        <li class="wow  fadeInUp animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeInUp;"><a href="https://discord.gg/T35jZ2hhPZ"><i class="fab fa-discord"></i></a>
+ 
+                                         </li>
+                                        <li class="wow  fadeInUp animated" data-wow-duration="1.6s" style="visibility: visible; animation-duration: 1.6s; animation-name: fadeInUp;"><a href="https://twitter.com/throwsnowballs"><i class="fab fa-twitter"></i></a></li>
+                                        <li class="wow  fadeInUp animated" data-wow-duration="1.9s" style="visibility: visible; animation-duration: 1.9s; animation-name: fadeInUp;"><a href="https://t.me/throwsnowballs"><i class="fab fa-telegram"></i></a></li>
+                                       
+                                        <li class="wow  fadeInUp animated" data-wow-duration="2.4s" style="visibility: visible; animation-duration: 2.4s; animation-name: fadeInUp;"><a href="https://medium.com/snowball-finance/snowball-finance-launce-68554044bdd2"><i class="fab fa-medium"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row alignCenter mr-t50">
+                	<img src="images/logo/avaxLogo.png" width="75"> 
+                	<h4 class="white mr-t15">Powered by Avalanche</h4>
+                	<p class="small"> Snowball on Avalanche © 2021</p>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!--Footer area end here-->
+    <!-- all js here
+need to compress it further.
+     -->
+    <!-- jquery latest version -->
+    <script src="js/vendor/jquery-3.2.1.min.js"></script>
+    <!-- tether js -->
+    <script src="js/tether.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl.carousel js -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- meanmenu js -->
+    <script src="js/jquery.meanmenu.js"></script>
+    <!-- jquery-ui js -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- easypiechart js -->
+    <script src="js/jquery.easypiechart.min.js"></script>
+    <!-- particles js -->
+    <!-- wow js -->
+    <script src="js/wow.min.js"></script>
+    <!-- smooth-scroll js -->
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/particles.min.js"></script>
+    <!-- plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- EChartJS JavaScript -->
+    <script src="js/echarts-en.min.js"></script>
+    <script src="js/echarts-liquidfill.min.js"></script>
+    <script src="js/vc_round_chart.min.js"></script>
+    <!-- main js -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
