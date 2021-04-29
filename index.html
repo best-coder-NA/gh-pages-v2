@@ -67,6 +67,16 @@
       gtag('js', new Date());
 
       gtag('config', 'G-NZW5VG3KCS');
+      fetch('http://api.snowball.network/analytics/tvl').then(function (response) {
+        console.log('response', response);
+        return response.json();
+      }).then(function (info) {
+        console.log('info', info);
+        document.getElementById('tvl-data').innerHTML = '$' + new Intl.NumberFormat('en-US').format(info.tvl.toFixed(0)) + ' TVL';
+      }).catch(function (err) {
+        document.getElementById('tvl-data').innerHTML = '';
+        console.log('could not get tvl');
+      });
     </script>
 </head>
 
@@ -170,7 +180,7 @@
                                                 <h2>Snowball Your Returns</h2>
                                                 <p style="font-size: 1.2em; color:#c2c4e8; ">Snowball combines multiple DeFi protocols to create an interconnected experience. Swap stablecoins, deposit liquidity, or auto-compound liquidity rewards. </p>
                                                 <div class="buttons">
-                                                 <h3 class="white"><a href="https://markr.io/#/applications/Snowball" target="_blank">$12,858,230 TVL</a></h3>
+                                                 <h3 class="white"><a id="tvl-data" href="https://markr.io/#/applications/Snowball" target="_blank"></a></h3>
                                                      
                                                     <a target="_blank" href="https://app.pangolin.exchange/#/swap?inputCurrency=avax&outputCurrency=0xc38f41a296a4493ff429f1238e030924a1542e50" class="btn1 mr-l0 mr-b50" data-animation="animated pulse">Buy SNOB</a>
                                                 </div>
