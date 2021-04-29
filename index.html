@@ -67,7 +67,7 @@
       gtag('js', new Date());
 
       gtag('config', 'G-NZW5VG3KCS');
-      fetch('http://api.snowball.network/analytics/tvl').then(function (response) {
+      fetch('https://api.snowball.network/analytics/tvl').then(function (response) {
         console.log('response', response);
         return response.json();
       }).then(function (info) {
