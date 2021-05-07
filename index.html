@@ -67,16 +67,16 @@
       gtag('js', new Date());
 
       gtag('config', 'G-NZW5VG3KCS');
-      fetch('https://x-api.snowball.network/dex/0xc38f41a296a4493ff429f1238e030924a1542e50/tvl.json').then(function (response) {
-        console.log('response', response);
-        return response.json();
-      }).then(function (info) {
-        console.log('info', info);
-        document.getElementById('tvl-data').innerHTML = '$' + new Intl.NumberFormat('en-US').format(info.locked.toFixed(0)) + ' TVL';
-      }).catch(function (err) {
-        document.getElementById('tvl-data').innerHTML = '';
-        console.log('could not get tvl');
-      });
+      // fetch('https://api.snowball.network/analytics/tvl').then(function (response) {
+      //   console.log('response', response);
+      //   return response.json();
+      // }).then(function (info) {
+      //   console.log('info', info);
+      //   document.getElementById('tvl-data').innerHTML = '$' + new Intl.NumberFormat('en-US').format(info.tvl.toFixed(0)) + ' TVL';
+      // }).catch(function (err) {
+      //   document.getElementById('tvl-data').innerHTML = '';
+      //   console.log('could not get tvl');
+      // });
     </script>
 </head>
 
@@ -833,7 +833,7 @@
       <a href="https://info.pangolin.exchange/#/token/0xc38f41a296a4493ff429f1238e030924a1542e50" target="_blank" class="col-sm-4 pb-4 mx-auto">
         <div class="card br-25 border border-2 snob-tokens">
           <div class="card-body text-center">
-            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xc38f41a296a4493ff429f1238e030924a1542e50/logo.png" width="48"> 
+            <img class="rounded-circle" src="https://raw.githubusercontent.com/ava-labs/bridge-tokens/main/avalanche-tokens/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png" width="48">
             <div class="fw-600 snobDarkBLue">Snowball (SNOB)</div>
           </div>
         </div>
@@ -897,7 +897,7 @@
       <a href="https://cchain.explorer.avax.network/address/0xC38f41A296A4493Ff429F1238e030924A1542e50/contracts" target="_blank" class="col-sm-3 pb-4 mx-auto">
         <div class="card br-25 border border-2 snob-tokens">
           <div class="card-body text-center">
-            <img class="rounded-circle" src="https://x-api.snowball.network/assets/avalanche-tokens/0xc38f41a296a4493ff429f1238e030924a1542e50/logo.png" width="48"> 
+            <img class="rounded-circle" src="https://raw.githubusercontent.com/ava-labs/bridge-tokens/main/avalanche-tokens/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png" width="48">
             <div class="fw-600 snobDarkBLue">Snowball Token</div>
           </div>
         </div>
