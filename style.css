@@ -1796,7 +1796,7 @@ header .mobilemenu .mean-container a.meanmenu-reveal {
   height: 100%;
   top: 0px;
   left: -500px;
-  background-color: #1e2644;
+  background-color: #363a56;
   overflow: scroll;
   overflow-x: hidden;
   z-index:1000;
@@ -1884,7 +1884,7 @@ header .mobilemenu .mean-container a.meanmenu-reveal {
   color: #ffffff;
   font-weight:bold;
   border-bottom:1px solid rgba(211, 211, 211, 0.49);
-  background: #1e2644;
+  background: #363a56;
    -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
     -ms-transition: all 0.5s;
@@ -1941,7 +1941,14 @@ header .mobilemenu .mean-container a.meanmenu-reveal {
 .slider-area {
   display: block;
   position: relative;
-  background: #f6f6ff;
+  background-image: url(images/logo/background_vector.svg), linear-gradient(#171b2b, #363a56);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .slider-area .carousel {
   position: relative;
@@ -2450,8 +2457,8 @@ footer .footer-bottom .foo-link ul li a:hover {
 }
 
 footer .footer-top {
-  background: rgb(30,38,68);
-background: linear-gradient(0deg, rgba(30,38,68,1) 16%, rgba(199,216,239,1) 90%);
+  background: #363a56;
+background: linear-gradient(0deg, #363a56 16%, rgba(199,216,239,1) 90%);
   display: block;
   position: relative;
   padding: 30px;
@@ -2464,7 +2471,7 @@ footer .footer-top .con {
 }
 footer .footer-top .con h2 {
   font-weight: 700; 
-  color:  #1c2132; 
+  color:  #363a56;
 }
 footer .footer-top .con ul li {
   display: inline-block;
